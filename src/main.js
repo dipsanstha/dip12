@@ -93,7 +93,7 @@ class SpaApp {
     renderHome() {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = `
-            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/hero-background.jpg') center/cover no-repeat;">
+            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
                     <div class="hero-content fade-in">
                         <h1>Welcome to Serenity Spa & Massage</h1>
@@ -112,7 +112,7 @@ class SpaApp {
                     <div class="services-grid">
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="/images/services/deep-tissue-massage.jpg" alt="Deep Tissue Massage" loading="lazy">
+                                <img src="public/images/services/deep-tissue-massage.jpg" alt="Deep Tissue Massage" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-spa"></i>
@@ -122,7 +122,7 @@ class SpaApp {
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="/images/services/aromatherapy-massage.jpg" alt="Aromatherapy Massage" loading="lazy">
+                                <img src="public/images/services/aromatherapy-massage.jpg" alt="Aromatherapy Massage" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-leaf"></i>
@@ -132,7 +132,7 @@ class SpaApp {
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="/images/services/hot-stone-therapy.jpg" alt="Hot Stone Therapy" loading="lazy">
+                                <img src="public/images/services/hot-stone-therapy.jpg" alt="Hot Stone Therapy" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-hot-tub"></i>
@@ -157,7 +157,7 @@ class SpaApp {
                     <p class="text-center fade-in">Discover our comprehensive range of spa and massage treatments designed to restore your mind, body, and spirit.</p>
                     
                     <div class="services-grid">
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/deep-tissue-massage.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/deep-tissue-massage.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-spa"></i>
@@ -168,7 +168,7 @@ class SpaApp {
                             </div>
                         </div>
                         
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/swedish-massage.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-leaf"></i>
@@ -179,7 +179,7 @@ class SpaApp {
                             </div>
                         </div>
                         
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/hot-stone-therapy.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/hot-stone-therapy.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-hot-tub"></i>
@@ -190,7 +190,7 @@ class SpaApp {
                             </div>
                         </div>
                         
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/aromatherapy-massage.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/aromatherapy-massage.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-seedling"></i>
@@ -201,7 +201,7 @@ class SpaApp {
                             </div>
                         </div>
                         
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/prenatal-massage.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/prenatal-massage.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-baby"></i>
@@ -212,7 +212,7 @@ class SpaApp {
                             </div>
                         </div>
                         
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/services/sports-massage.jpg') center/cover no-repeat;">
+                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/sports-massage.jpg') center/cover no-repeat;">
                             <div class="service-content">
                                 <div class="service-icon">
                                     <i class="fas fa-male"></i>

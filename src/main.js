@@ -93,7 +93,7 @@ class SpaApp {
     renderHome() {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = `
-            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/hero-background.jpg') center/cover no-repeat;">
+            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
                     <div class="hero-content fade-in">
                         <h1>Welcome to Serenity Spa & Massage</h1>

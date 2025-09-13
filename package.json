@@ -1,0 +1,22 @@
+{
+  "name": "spa-massage-website",
+  "version": "1.0.0",
+  "description": "A responsive single page application for a spa massage business",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev"
+  },
+  "keywords": ["spa", "massage", "website", "responsive", "single-page-application"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "vanilla-router": "^1.2.8"
+  }
+}

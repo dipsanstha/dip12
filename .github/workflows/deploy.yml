@@ -35,11 +35,7 @@ jobs:
       uses: actions/configure-pages@v4
       
     - name: Upload artifact
-<<<<<<< HEAD
       uses: actions/upload-pages-artifact@v3
-=======
-      uses: actions/upload-pages-artifact@v4
->>>>>>> 27338e35da42abb47406fbbd4228f03f674bdbbc
       with:
         path: './dist'
         

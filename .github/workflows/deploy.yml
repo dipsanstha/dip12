@@ -33,7 +33,19 @@ jobs:
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
-      
+
+    - name: Detect build output
+      id: detect-output
+      run: |
+        if [ -d "./dist" ]; then
+          echo "path=./dist" >> $GITHUB_OUTPUT
+        elif [ -d "./build" ]; then
+          echo "path=./build" >> $GITHUB_OUTPUT
+        else
+          echo "No dist or build folder found!"
+          exit 1
+        fi
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:

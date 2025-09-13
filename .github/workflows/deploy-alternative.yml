@@ -15,7 +15,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: './dist'
     
     steps:
     - name: Checkout
@@ -49,15 +49,15 @@ jobs:
         fi
 
     - name: Upload artifact for Pages
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
-        path: ${{ steps.detect-output.outputs.path }}
+        path: './dist'
 
     - name: Upload debug artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-debug-${{ github.run_id }}
-        path: ${{ steps.detect-output.outputs.path }}
+        path: './dist'
         
     - name: Deploy to GitHub Pages
       id: deployment

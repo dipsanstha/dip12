@@ -8,7 +8,7 @@ class SpaApp {
             'services': this.renderServices,
             'about': this.renderAbout,
             'contact': this.renderContact,
-            'booking': this.renderBooking
+            
         };
         
         this.init();
@@ -99,7 +99,6 @@ class SpaApp {
                         <h1>Welcome to Serenity Spa & Massage</h1>
                         <p>Experience ultimate relaxation and rejuvenation with our premium spa and massage services. Your journey to wellness begins here.</p>
                         <div class="hero-buttons">
-                            <a href="#booking" class="btn btn-primary" data-link>Book Appointment</a>
                             <a href="#services" class="btn btn-secondary" data-link>View Services</a>
                         </div>
                     </div>
@@ -112,33 +111,33 @@ class SpaApp {
                     <div class="services-grid">
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="public/images/services/deep-tissue-massage.jpg" alt="Deep Tissue Massage" loading="lazy">
+                                <img src="public/images/services/OIP.jpg" alt="Laxmi’s Facial Special" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-spa"></i>
                             </div>
-                            <h3>Deep Tissue Massage</h3>
-                            <p>Therapeutic massage targeting deep muscle tensions and chronic pain relief.</p>
+                            <h3>Laxmi's Facial Special</h3>
+                            <p>Indulge in our luxurious facial treatment, now at a discounted price for a limited time.</p>
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="public/images/services/aromatherapy-massage.jpg" alt="Aromatherapy Massage" loading="lazy">
+                                <img src="public/images/services/OIP4.jpg" alt="Microdermabrasion" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-leaf"></i>
                             </div>
-                            <h3>Aromatherapy</h3>
-                            <p>Relaxing massage combined with essential oils for ultimate stress relief.</p>
+                            <h3>Microdermabrasion</h3>
+                            <p>Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.</p>
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="public/images/services/hot-stone-therapy.jpg" alt="Hot Stone Therapy" loading="lazy">
+                                <img src="public/images/services/R.jpg" alt="Lash Lift" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-hot-tub"></i>
                             </div>
-                            <h3>Hot Stone Therapy</h3>
-                            <p>Heated stone massage to melt away tension and improve circulation.</p>
+                           <h3>Lash Lift</h3>
+                            <p>Lift and curl your lashes for a natural, wide-eyed look.</p>
                         </div>
                     </div>
                 </div>
@@ -147,92 +146,470 @@ class SpaApp {
         
         this.initAnimations();
     }
+renderServices() {
+    const mainContent = document.getElementById('main-content');
+    mainContent.innerHTML = `
+        <section class="services">
+            <div class="container">
+                <h1 class="text-center fade-in">Our Services</h1>
+                <p class="text-center fade-in">Explore our range of luxurious treatments designed to help you relax, unwind, and rejuvenate.</p>
+                
+                <div class="services-grid">
+                    <!-- Facial Services -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>Custom Facial</h3>
+                            <p>Personalized facial to address your unique skin needs and provide a radiant glow.</p>
+                            <strong>$85 | 55 min</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>Laxmi’s Facial Special</h3>
+                            <p>Indulge in our luxurious facial treatment, now at a discounted price for a limited time.</p>
+                            <strong>$190 (Now $150) | 75 min</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>Microchanneling Special</h3>
+                            <p>Enhance your skin's texture with our microchanneling treatment, ideal for reducing fine lines and scars.</p>
+                            <strong>$225 | 60 min</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/dd.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>O2 Derm Oxygen Facial</h3>
+                            <p>Rejuvenate your skin with the oxygen facial, perfect for hydration and revitalization.</p>
+                            <strong>$150 | 65 min</strong>
+                        </div>
+                    </div>
 
-    renderServices() {
-        const mainContent = document.getElementById('main-content');
-        mainContent.innerHTML = `
-            <section class="services">
-                <div class="container">
-                    <h1 class="text-center fade-in">Our Services</h1>
-                    <p class="text-center fade-in">Discover our comprehensive range of spa and massage treatments designed to restore your mind, body, and spirit.</p>
-                    
-                    <div class="services-grid">
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/deep-tissue-massage.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-spa"></i>
-                                </div>
-                                <h3>Deep Tissue Massage</h3>
-                                <p>Intensive therapeutic massage targeting chronic muscle tension and pain. Perfect for athletes and those with physical stress.</p>
-                                <strong>60 min - $120 | 90 min - $160</strong>
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/acne.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
                             </div>
+                            <h3>Acne Facial</h3>
+                            <p>Treat acne-prone skin with our specialized acne facial that helps to cleanse, balance, and reduce inflammation.</p>
+                            <strong>$95 | 55 min</strong>
                         </div>
-                        
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-leaf"></i>
-                                </div>
-                                <h3>Swedish Massage</h3>
-                                <p>Classic relaxation massage with long, flowing strokes to reduce stress and promote overall well-being.</p>
-                                <strong>60 min - $100 | 90 min - $140</strong>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/glow.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
                             </div>
-                        </div>
-                        
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/hot-stone-therapy.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-hot-tub"></i>
-                                </div>
-                                <h3>Hot Stone Therapy</h3>
-                                <p>Heated volcanic stones combined with massage techniques to deeply relax muscles and improve circulation.</p>
-                                <strong>75 min - $150</strong>
-                            </div>
-                        </div>
-                        
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/aromatherapy-massage.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-seedling"></i>
-                                </div>
-                                <h3>Aromatherapy Massage</h3>
-                                <p>Therapeutic massage enhanced with carefully selected essential oils for emotional and physical healing.</p>
-                                <strong>60 min - $110 | 90 min - $150</strong>
-                            </div>
-                        </div>
-                        
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/prenatal-massage.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-baby"></i>
-                                </div>
-                                <h3>Prenatal Massage</h3>
-                                <p>Specialized massage for expecting mothers to reduce pregnancy-related discomfort and stress.</p>
-                                <strong>60 min - $115</strong>
-                            </div>
-                        </div>
-                        
-                        <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/sports-massage.jpg') center/cover no-repeat;">
-                            <div class="service-content">
-                                <div class="service-icon">
-                                    <i class="fas fa-male"></i>
-                                </div>
-                                <h3>Sports Massage</h3>
-                                <p>Performance-focused massage for athletes to prevent injuries and enhance recovery.</p>
-                                <strong>60 min - $125 | 90 min - $165</strong>
-                            </div>
+                            <h3>GlowTox Facelift Facial</h3>
+                            <p>Lift and brighten your face with this signature treatment that promotes youthful radiance and tightens the skin.</p>
+                            <strong>$200 | 70 min</strong>
                         </div>
                     </div>
                     
-                    <div class="text-center mt-3">
-                        <a href="#booking" class="btn btn-primary" data-link>Book Your Treatment</a>
+                    <!-- Add-On Treatments -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP4.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-fire"></i>
+                            </div>
+                            <h3>Microdermabrasion</h3>
+                            <p>Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.</p>
+                            <strong>$45 | 10 min</strong>
+                        </div>
                     </div>
+                    
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/goat.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-fire"></i>
+                            </div>
+                            <h3>Goat Milk Peel</h3>
+                            <p>A soothing and nourishing peel, perfect for sensitive skin.</p>
+                            <strong>$25 | 10 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/LED-Light-Therapy-Treatment-1080x675.png') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>LED Therapy</h3>
+                            <p>Boost your skin’s healing process with our LED therapy, designed to treat acne, aging, and pigmentation.</p>
+                            <strong>$25 | 15 min</strong>
+                        </div>
+                    </div>
+                    
+                    <!-- Body Treatments -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/pbt.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>Purifying Back Treatment</h3>
+                            <p>Cleanse and detoxify your back with this deep-cleansing back treatment.</p>
+                            <strong>$85 | 50 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/R.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Lash Lift</h3>
+                            <p>Lift and curl your lashes for a natural, wide-eyed look.</p>
+                            <strong>$85 | 50 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Brow Lamination</h3>
+                            <p>Shape and set your brows for a fuller, more defined look.</p>
+                            <strong>$75 | 50 min</strong>
+                        </div>
+                    </div>
+
+                    <!-- Tinting Services -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP2.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Lash Tint</h3>
+                            <p>Darken your lashes for a dramatic effect without the need for mascara.</p>
+                            <strong>$20 | 20 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Brow Tint</h3>
+                            <p>Enhance the shape and color of your brows with a custom tinting treatment.</p>
+                            <strong>$20 | 15 min</strong>
+                        </div>
+                    </div>
+
+                    <!-- Waxing Services -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/liwax.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="	fa fa-bullseye"></i>
+                            </div>
+                            <h3>Lip Wax</h3>
+                            <p>Quick and gentle waxing for a smooth and clean upper lip.</p>
+                            <strong>$10 | 10 min</strong>
+                        </div>
+                    </div>
+                    
+                    <!-- Waxing Services Continued -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-bookmark"></i>
+                            </div>
+                            <h3>Brazilian Wax</h3>
+                            <p>Experience a smooth, clean finish with our Brazilian wax treatment.</p>
+                            <strong>$65+ | 30 min</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-bookmark"></i>
+                            </div>
+                            <h3>Brow Wax</h3>
+                            <p>Shape and define your brows with our precise waxing service.</p>
+                            <strong>$25 | 20 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/Facial-Waxing-e1420480171351-1024x920.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-bookmark"></i>
+                            </div>
+                            <h3>Full Face Wax</h3>
+                            <p>Remove unwanted hair from your entire face for smooth, flawless skin.</p>
+                            <strong>$55 | 40 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/d019b8c020ccec881b14fd77bd91b992.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-bookmark"></i>
+                            </div>
+                            <h3>Underarm Wax</h3>
+                            <p>Get smooth underarms with our quick and effective waxing treatment.</p>
+                            <strong>$25 | 15 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-hourglass-2"></i>
+                            </div>
+                            <h3>Bikini Extended</h3>
+                            <p>Remove hair beyond the bikini line for a clean and smooth look.</p>
+                            <strong>$50 | 20 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/chin.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-location-arrow"></i>
+                            </div>
+                            <h3>Chin Wax</h3>
+                            <p>Quick and precise chin waxing for smooth, hair-free skin.</p>
+                            <strong>$10 | 15 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-location-arrow"></i>
+                            </div>
+                            <h3>Nostril Wax</h3>
+                            <p>Quick nostril waxing for a clean and fresh feel.</p>
+                            <strong>$20 | 10 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/leg.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <h3>Half Legs Wax</h3>
+                            <p>Remove hair from your knees down to your ankles for smooth legs.</p>
+                            <strong>$50 | 35 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/legg.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <h3>Full Legs Wax</h3>
+                            <p>Get smooth, hair-free legs from top to bottom.</p>
+                            <strong>$90 | 55 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <h3>Half Arms Wax</h3>
+                            <p>Get smooth arms from your elbows down to your wrists.</p>
+                            <strong>$35 | 30 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/arm.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <h3>Full Arms Wax</h3>
+                            <p>Wax your full arms from wrist to shoulder for smooth skin.</p>
+                            <strong>$60 | 40 min</strong>
+                        </div>
+                    </div>
+
+                    <!-- Threading Services -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/thre.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <h3>Brow Threading</h3>
+                            <p>Shape your brows with precision threading for a flawless look.</p>
+                            <strong>$25 | 20 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-object-ungroup"></i>
+                            </div>
+                            <h3>Brow, Lip, Chin Threading</h3>
+                            <p>Threading service for your brows, lip, and chin for a clean, smooth look.</p>
+                            <strong>$45 | 25 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-object-ungroup"></i>
+                            </div>
+                            <h3>Chin Threading</h3>
+                            <p>Get a perfectly smooth chin with our precise threading service.</p>
+                            <strong>$10 | 10 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/th.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-puzzle-piece"></i>
+                            </div>
+                            <h3>Full Face Threading</h3>
+                            <p>Get rid of unwanted facial hair with our full face threading service.</p>
+                            <strong>$60 | 40 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-puzzle-piece"></i>
+                            </div>
+                            <h3>Neck Threading</h3>
+                            <p>Thread your neck area for a smooth and clean look.</p>
+                            <strong>$20 | 15 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fa fa-leaf"></i>
+                            </div>
+                            <h3>Upper Lip Threading</h3>
+                            <p>Get rid of unwanted upper lip hair with this gentle threading service.</p>
+                            <strong>$10 | 10 min</strong>
+                        </div>
+                    </div>
+
+                    <!-- Gentlemen’s Services -->
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/Gentlemans-Facial_1157432647-LR.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Facial</h3>
+                            <p>A relaxing facial tailored to a gentleman’s skincare needs.</p>
+                            <strong>$120 | 60 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentleman’s Abdomen Wax</h3>
+                            <p>Wax your abdomen area for a clean and smooth finish.</p>
+                            <strong>$35 | 25 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Back Treatment</h3>
+                            <p>A relaxing back treatment to keep your skin smooth and refreshed.</p>
+                            <strong>$90 | 50 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Brow Wax</h3>
+                            <p>Get your brows shaped with precision to create a clean and neat look.</p>
+                            <strong>$25 | 20 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/01604aaa4181323eeb01133d8ee0aff5.png') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Chest Wax</h3>
+                            <p>Experience a smooth chest with our efficient chest waxing treatment.</p>
+                            <strong>$80 | 40 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/back-wax.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Full Back Wax</h3>
+                            <p>Get a smooth, hair-free back with our full back waxing service.</p>
+                            <strong>$80 | 60 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Half Back Wax</h3>
+                            <p>Wax your back from shoulders to mid-back for a smoother look.</p>
+                            <strong>$45 | 30 min</strong>
+                        </div>
+                    </div>
+
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Gentlemen’s Nostril Wax</h3>
+                            <p>Get rid of unwanted nose hair with our nostril waxing service.</p>
+                            <strong>$20 | 15 min</strong>
+                        </div>
+                    </div>
+
                 </div>
-            </section>
-        `;
-        
-        this.initAnimations();
-    }
+            </div>
+        </section>
+    `;   
+    this.initAnimations();
+}
+
 
     renderAbout() {
         const mainContent = document.getElementById('main-content');
@@ -279,45 +656,7 @@ class SpaApp {
                     <p class="text-center fade-in">Get in touch with us to schedule your appointment or ask any questions.</p>
                     
                     <div class="contact-content">
-                        <div class="contact-form fade-in">
-                            <h3>Send us a Message</h3>
-                            <form id="contact-form">
-                                <div class="form-group">
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="service">Service Interest</label>
-                                    <select id="service" name="service">
-                                        <option value="">Select a service</option>
-                                        <option value="deep-tissue">Deep Tissue Massage</option>
-                                        <option value="swedish">Swedish Massage</option>
-                                        <option value="hot-stone">Hot Stone Therapy</option>
-                                        <option value="aromatherapy">Aromatherapy Massage</option>
-                                        <option value="prenatal">Prenatal Massage</option>
-                                        <option value="sports">Sports Massage</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" name="message" placeholder="Tell us how we can help you..."></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Send Message</button>
-                            </form>
-                        </div>
+                        
                         
                         <div class="contact-info fade-in">
                             <h3>Visit Us</h3>
@@ -326,7 +665,7 @@ class SpaApp {
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Address:</span>
-                                        <span class="contact-value">123 Wellness Avenue<br>Peaceful City, State 12345</span>
+                                        <span class="contact-value"><a href="">123 Wellness Avenue<br>Peaceful City, State 12345</a></span>
                                     </div>
                                 </div>
                                 
@@ -334,7 +673,7 @@ class SpaApp {
                                     <i class="fas fa-phone"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Phone:</span>
-                                        <span class="contact-value">(555) 123-4567</span>
+                                        <span class="contact-value"><a href="tel:">(555) 123-4567</a></span>
                                     </div>
                                 </div>
                                 
@@ -342,7 +681,7 @@ class SpaApp {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value">info@serenityspa.com</span>
+                                        <span class="contact-value"><a href="mailto:">info@serenityspa.com</a></span>
                                     </div>
                                 </div>
                                 
@@ -367,7 +706,7 @@ class SpaApp {
                             <div class="social-section mt-2">
                                 <h4>Follow Us</h4>
                                 <div class="social-links">
-                                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                                    <a href="https://www.facebook.com/laxmi.bhandari.507/#" aria-label="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
                                     <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                                 </div>
@@ -382,131 +721,7 @@ class SpaApp {
         this.initContactForm();
     }
 
-    renderBooking() {
-        const mainContent = document.getElementById('main-content');
-        mainContent.innerHTML = `
-            <section class="contact">
-                <div class="container">
-                    <h1 class="text-center fade-in">Book Your Appointment</h1>
-                    <p class="text-center fade-in">Schedule your relaxing spa experience with us today.</p>
-                    
-                    <div class="contact-content">
-                        <div class="contact-form fade-in">
-                            <h3>Appointment Details</h3>
-                            <form id="booking-form">
-                                <div class="form-group">
-                                    <label for="book-name">Full Name</label>
-                                    <input type="text" id="book-name" name="name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-email">Email Address</label>
-                                    <input type="email" id="book-email" name="email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-phone">Phone Number</label>
-                                    <input type="tel" id="book-phone" name="phone" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-service">Select Service</label>
-                                    <select id="book-service" name="service" required>
-                                        <option value="">Choose your treatment</option>
-                                        <option value="deep-tissue-60">Deep Tissue Massage (60 min) - $120</option>
-                                        <option value="deep-tissue-90">Deep Tissue Massage (90 min) - $160</option>
-                                        <option value="swedish-60">Swedish Massage (60 min) - $100</option>
-                                        <option value="swedish-90">Swedish Massage (90 min) - $140</option>
-                                        <option value="hot-stone">Hot Stone Therapy (75 min) - $150</option>
-                                        <option value="aromatherapy-60">Aromatherapy Massage (60 min) - $110</option>
-                                        <option value="aromatherapy-90">Aromatherapy Massage (90 min) - $150</option>
-                                        <option value="prenatal">Prenatal Massage (60 min) - $115</option>
-                                        <option value="sports-60">Sports Massage (60 min) - $125</option>
-                                        <option value="sports-90">Sports Massage (90 min) - $165</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-date">Preferred Date</label>
-                                    <input type="date" id="book-date" name="date" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-time">Preferred Time</label>
-                                    <select id="book-time" name="time" required>
-                                        <option value="">Select time</option>
-                                        <option value="09:00">9:00 AM</option>
-                                        <option value="10:00">10:00 AM</option>
-                                        <option value="11:00">11:00 AM</option>
-                                        <option value="12:00">12:00 PM</option>
-                                        <option value="13:00">1:00 PM</option>
-                                        <option value="14:00">2:00 PM</option>
-                                        <option value="15:00">3:00 PM</option>
-                                        <option value="16:00">4:00 PM</option>
-                                        <option value="17:00">5:00 PM</option>
-                                        <option value="18:00">6:00 PM</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="book-notes">Special Requests</label>
-                                    <textarea id="book-notes" name="notes" placeholder="Any specific areas of focus, allergies, or special requests..."></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Book Appointment</button>
-                            </form>
-                        </div>
-                        
-                        <div class="contact-info fade-in">
-                            <h3>Booking Information</h3>
-                            <div class="contact-details">
-                                <div class="contact-item">
-                                    <i class="fas fa-info-circle"></i>
-                                    <div class="contact-text">
-                                        <span class="contact-label">Booking Policy:</span>
-                                        <span class="contact-value">Appointments can be cancelled or rescheduled up to 24 hours in advance.</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-item">
-                                    <i class="fas fa-credit-card"></i>
-                                    <div class="contact-text">
-                                        <span class="contact-label">Payment:</span>
-                                        <span class="contact-value">We accept cash, all major credit cards, and gift certificates.</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-item">
-                                    <i class="fas fa-clock"></i>
-                                    <div class="contact-text">
-                                        <span class="contact-label">Arrival:</span>
-                                        <span class="contact-value">Please arrive 10 minutes early for your appointment.</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <div class="contact-text">
-                                        <span class="contact-label">Questions?</span>
-                                        <span class="contact-value">Call us at (555) 123-4567</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="gift-section mt-2">
-                                <h4>Gift Certificates Available!</h4>
-                                <p>Perfect for birthdays, holidays, or any special occasion. Contact us to purchase.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
-        
-        this.initAnimations();
-        this.initBookingForm();
-    }
-
+     
     render404() {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = `
@@ -544,23 +759,6 @@ class SpaApp {
                 e.preventDefault();
                 this.handleContactSubmit(form);
             });
-        }
-    }
-
-    initBookingForm() {
-        const form = document.getElementById('booking-form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleBookingSubmit(form);
-            });
-        }
-
-        // Set minimum date to today
-        const dateInput = document.getElementById('book-date');
-        if (dateInput) {
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.setAttribute('min', today);
         }
     }
 

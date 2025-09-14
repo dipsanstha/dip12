@@ -4,7 +4,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+a{
+    text-decoration: none;
+    color: var(--primary-color);
+}
+a:hover{
+    color: var(--text-dark);
+}
 :root {
     /* Color Palette */
     --primary-color: #8B7355;
@@ -16,6 +22,7 @@
     --white: #FFFFFF;
     --light-bg: #F9F7F4;
     --border-color: #E5E5E5;
+    --lavender: lavender;
     
     /* Typography */
     --font-primary: 'Playfair Display', serif;
@@ -39,12 +46,12 @@ html {
     font-size: 16px;
 }
 
-body {
+ body {
     font-family: var(--font-secondary);
     font-weight: 400;
     line-height: 1.6;
     color: var(--text-dark);
-    background-color: var(--white);
+    background-color: rgba(241, 221, 43, 0.25);
     overflow-x: hidden;
 }
 
@@ -123,9 +130,7 @@ p {
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--white);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: var(--lavender);
     box-shadow: var(--box-shadow);
     z-index: 1000;
     padding: 1rem 0;
@@ -231,7 +236,7 @@ main {
 /* Services Section */
 .services {
     padding: var(--section-padding);
-    background-color: var(--white);
+    background-color: rgba(247, 191, 25, 0.15);
 }
 
 .services-grid {
@@ -242,7 +247,7 @@ main {
 }
 
 .service-card {
-    background-color: var(--light-bg);
+    background-color: var(--white);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
@@ -292,6 +297,8 @@ main {
 
 .contact-content {
     display: grid;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
 }
@@ -338,7 +345,6 @@ main {
 .contact-info {
     background-color: var(--light-bg);
     padding: 2rem;
-
     border-radius: 15px;
 }
 
@@ -350,6 +356,7 @@ main {
 .contact-info p {
     display: flex;
     align-items: center;
+    word-break: break-word;
     gap: 1rem;
     margin-bottom: 1rem;
 }
@@ -363,6 +370,7 @@ main {
 /* Responsive Contact Information Structure */
 .contact-details {
     display: flex;
+    position: relative;
     flex-direction: column;
     gap: 1.5rem;
 }
@@ -450,7 +458,8 @@ main {
 
 /* Footer */
 .footer {
-    background-color: var(--primary-color);
+
+    background-color: var(--primary-dark);
     color: var(--white);
     padding: 3rem 0 1rem;
 }
@@ -690,36 +699,3 @@ main {
     display: block;
     margin-top: 0.5rem;
 }
-/* Remove incorrect background-image assignments from animation and icon classes. 
-   Instead, assign background images to the appropriate service card elements using correct selectors and asset paths, for example:
-
-.fas.fa-leaf{
-    background-image: url('public/images/pexels-shvetsa-5069494.jpg');
-}
-.fas.fa-hot-tub{
-    background-image: url("public/images/public/images/sauna-6766761_1280.jpg");
-}
-.fas.fa-seedling{
-    background-image: url("public/images/services/aromatherapy-massage.jpg");
-}
-.fas.fa-baby{
-    background-image: url("public/images/photo-1519823551278-64ac92734fb1.jpg");
-}
-.service-card-bg.hot-tub {
-    background-image: url('/images/sauna-6766761_1280.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.service-card-bg.seedling {
-    background-image: url('/images/services/aromatherapy-massage.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.service-card-bg.baby {
-    background-image: url('/images/photo-1519823551278-64ac92734fb1.jpg');
-    background-size: cover;
-    background-position: center;
-}
-*/

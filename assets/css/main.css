@@ -360,7 +360,9 @@ main {
     gap: 1rem;
     margin-bottom: 1rem;
 }
-
+.fade-in-visible{
+padding-right=100px;
+padding-left=100px; }   
 .contact-info i {
     color: var(--primary-color);
     font-size: 1.2rem;
@@ -371,7 +373,7 @@ main {
 .contact-details {
     display: flex;
     position: relative;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1.5rem;
 }
 

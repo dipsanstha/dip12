@@ -371,7 +371,7 @@ main {
 .contact-details {
     display: flex;
     position: relative;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1.5rem;
 }
 
@@ -455,7 +455,11 @@ main {
     line-height: 1.4;
     margin-bottom: 0;
 }
-
+.contact-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* Footer */
 .footer {
 

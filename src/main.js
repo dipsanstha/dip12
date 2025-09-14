@@ -691,12 +691,12 @@ renderServices() {
                                         <span class="contact-label">Hours:</span>
                                         <div class="hours-info">
                                             <div class="hours-row">
-                                                <span class="days">Mon-Fri:</span>
-                                                <span class="times">9:00 AM - 8:00 PM</span>
+                                                <span class="days">Mon-Thu:</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
                                             <div class="hours-row">
-                                                <span class="days">Sat-Sun:</span>
-                                                <span class="times">10:00 AM - 6:00 PM</span>
+                                                <span class="days">Fri-Sun:</span>
+                                                <span class="times">9:00 AM - 5:00 PM</span>
                                             </div>
                                         </div>
                                     </div>

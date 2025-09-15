@@ -12,7 +12,7 @@
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-
+    
     .services-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1.5rem;
@@ -102,11 +102,11 @@
     }
     
     .contact-item {
-        gap: 0.9rem;
+        gap: 1.3rem;
     }
     
     .contact-label {
-        font-size: 0.92rem;
+        font-size: 2rem;
     }
     
     .contact-value {

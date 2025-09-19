@@ -96,7 +96,7 @@ class SpaApp {
             <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
                     <div class="hero-content fade-in">
-                        <h1>Welcome to Serenity Spa & Massage</h1>
+                        <h1>Welcome to Skin Care by Laxmi Raixa</h1>
                         <p>Experience ultimate relaxation and rejuvenation with our premium spa and massage services. Your journey to wellness begins here.</p>
                         <div class="hero-buttons">
                             <a href="#services" class="btn btn-secondary" data-link>View Services</a>
@@ -618,12 +618,12 @@ renderServices() {
                 <div class="container">
                     <div class="about-content">
                         <div class="about-text fade-in">
-                            <h2>About Serenity Spa</h2>
-                            <p>Founded in 2015, Serenity Spa & Massage has been dedicated to providing exceptional wellness experiences in a tranquil, nurturing environment. Our mission is to help you achieve balance, relaxation, and rejuvenation through our comprehensive range of therapeutic treatments.</p>
+                            <h2>About Skin Care by Laxmi Raixa</h2>
+                            <p>Founded in 2025, Skin Care by Laxmi Raixa has been dedicated to providing exceptional wellness experiences in a tranquil, nurturing environment. Our mission is to help you achieve balance, relaxation, and rejuvenation through our comprehensive range of therapeutic treatments.</p>
                             
                             <p>Our team of licensed massage therapists and wellness professionals bring years of experience and passion for healing to every session. We believe in the power of touch therapy to not only relax the body but also restore the mind and spirit.</p>
                             
-                            <h3>Why Choose Serenity Spa?</h3>
+                            <h3>Why Choose Skin Care by Laxmi Raixa?</h3>
                             <ul>
                                 <li>Licensed and certified massage therapists</li>
                                 <li>Pristine, calming environment</li>
@@ -681,7 +681,7 @@ renderServices() {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value"><a href="mailto:">info@serenityspa.com</a></span>
+                                        <span class="contact-value"><a href="mailto:">info@Skin Care by Laxmi Raixacom</a></span>
                                     </div>
                                 </div>
                                 

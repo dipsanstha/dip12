@@ -96,7 +96,7 @@ class SpaApp {
             <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
                     <div class="hero-content fade-in">
-                        <h1>Welcome to Skin Care by Laxmi Raixa</h1>
+                        <h1>Welcome to Skin Care by Laxmi</h1>
                         <p>Experience ultimate relaxation and rejuvenation with our premium spa and massage services. Your journey to wellness begins here.</p>
                         <div class="hero-buttons">
                             <a href="#services" class="btn btn-secondary" data-link>View Services</a>

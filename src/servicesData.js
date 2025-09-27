@@ -3,13 +3,13 @@ export const servicesByCategory = {
     '1. Signature Facials': [
         { name: 'Custom Facial', image: 'swedish-massage.jpg', description: 'Personalized facial to address your unique skin needs and provide a radiant glow.', price: '$85', duration: '55 min', icon: 'fa-spa' },
         { name: 'Laxmi\'s Facial Special', image: 'OIP.jpg', description: 'Indulge in our luxurious facial treatment, now at a discounted price for a limited time.', price: '$150', duration: '75 min', icon: 'fa-spa' },
-        { name: 'O2 Derm Oxygen Facial', image: 'dd.jpg', description: 'Rejuvenate your skin with the oxygen facial, perfect for hydration and revitalization.', price: '$150', duration: '65 min', icon: 'fa-spa' },
-        { name: 'GlowTox Facelift Facial', image: 'glow.jpg', description: 'Lift and brighten your face with this signature treatment that promotes youthful radiance and tightens the skin.', price: '$200', duration: '70 min', icon: 'fa-spa' }
-    ],
-    '2. Advanced Skin Treatments': [
+        { name: 'O2 Derm Oxygen Facial', image: 'oxygenfacial.jpg', description: 'Rejuvenate your skin with the oxygen facial, perfect for hydration and revitalization.', price: '$150', duration: '65 min', icon: 'fa-spa' },
+        { name: 'GlowTox Facelift Facial', image: 'glow.jpg', description: 'Lift and brighten your face with this signature treatment that promotes youthful radiance and tightens the skin.', price: '$200', duration: '70 min', icon: 'fa-spa' },
         { name: 'Microchanneling Special', image: 'swedish-massage.jpg', description: 'Enhance your skin\'s texture with our microchanneling treatment, ideal for reducing fine lines and scars.', price: '$225', duration: '60 min', icon: 'fa-spa' },
-        { name: 'Acne Facial', image: 'acne.jpg', description: 'Treat acne-prone skin with our specialized acne facial that helps to cleanse, balance, and reduce inflammation.', price: '$95', duration: '55 min', icon: 'fa-spa' },
-        { name: 'Microdermabrasion', image: 'OIP4.jpg', description: 'Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.', price: '$45', duration: '10 min', icon: 'fa-fire' },
+        { name: 'Acne Facial', image: 'acne.jpg', description: 'Treat acne-prone skin with our specialized acne facial that helps to cleanse, balance, and reduce inflammation.', price: '$95', duration: '55 min', icon: 'fa-spa' }
+    ],
+    '2. Add-On Treatments': [
+        { name: 'Microdermabrasion', image: 'OIP4.jpg', description: 'Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.', price: '$120', duration: '10 min', icon: 'fa-fire' },
         { name: 'LED Therapy', image: 'LED-Light-Therapy-Treatment-1080x675.png', description: 'Boost your skin\'s healing process with our LED therapy, designed to treat acne, aging, and pigmentation.', price: '$25', duration: '15 min', icon: 'fa-lightbulb' },
         { name: 'Goat Milk Peel', image: 'goat.jpg', description: 'A soothing and nourishing peel, perfect for sensitive skin.', price: '$25', duration: '10 min', icon: 'fa-fire' }
     ],

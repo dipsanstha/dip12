@@ -260,12 +260,12 @@ class SpaApp {
                 <div class="container">
                     <div class="about-content">
                         <div class="about-text fade-in">
-                            <h2>About Skin Care by Laxmi Raixa</h2>
-                            <p>Founded in 2025, Skin Care by Laxmi Raixa has been dedicated to providing exceptional wellness experiences in a tranquil, nurturing environment. Our mission is to help you achieve balance, relaxation, and rejuvenation through our comprehensive range of therapeutic treatments.</p>
+                            <h2>About Skin Care by Laxmi</h2>
+                            <p>Founded in 2025, Skin Care by Laxmi has been dedicated to providing exceptional wellness experiences in a tranquil, nurturing environment. Our mission is to help you achieve balance, relaxation, and rejuvenation through our comprehensive range of therapeutic treatments.</p>
                             
                             <p>Our team of licensed massage therapists and wellness professionals bring years of experience and passion for healing to every session. We believe in the power of touch therapy to not only relax the body but also restore the mind and spirit.</p>
                             
-                            <h3>Why Choose Skin Care by Laxmi Raixa?</h3>
+                            <h3>Why Choose Skin Care by Laxmi?</h3>
                             <ul>
                                 <li>Licensed Skin Therapist (Esthetician) delivering advanced skincare services in a relaxing, rejuvenating environment.</li>
                                 <li>Graduate of the San Francisco Institute of Esthetics and Cosmetology with over a decade of industry experience across esteemed Bay Area spas.</li>
@@ -322,7 +322,7 @@ class SpaApp {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value"><a href="mailto:">info@Skin Care by Laxmi Raixacom</a></span>
+                                        <span class="contact-value"><a href="mailto:">info@SkinCarebyLaxmi.com</a></span>
                                     </div>
                                 </div>
                                 

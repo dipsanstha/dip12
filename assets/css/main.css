@@ -330,6 +330,9 @@ p {
     transition: var(--transition);
     position: relative;
 }
+.nav-link.book-now{
+    width: 90%;
+}
 
 .nav-link:not(.btn-primary):hover {
     color: var(--primary-color);

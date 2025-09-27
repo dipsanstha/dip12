@@ -6,6 +6,9 @@
         --section-padding: 60px 0;
         --container-padding: 0 15px;
     }
+    .nav-logo h2{
+        font-size: 1.8rem;
+    }
 
     .about-content,
     .contact-content {
@@ -30,7 +33,7 @@
         left: -100%;
         top: 80px;
         flex-direction: column;
-        background-color: var(--white);
+        background-color: rgba(91, 67, 30, 0.9);
         width: 100%;
         text-align: center;
         transition: 0.3s;

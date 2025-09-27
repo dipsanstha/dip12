@@ -97,7 +97,7 @@ class SpaApp {
     renderHome() {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = `
-            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
+            <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
                     <div class="hero-content fade-in">
                         <h1>Welcome to Skin Care by Laxmi</h1>
@@ -267,12 +267,11 @@ class SpaApp {
                             
                             <h3>Why Choose Skin Care by Laxmi Raixa?</h3>
                             <ul>
-                                <li>Licensed and certified massage therapists</li>
-                                <li>Pristine, calming environment</li>
-                                <li>Personalized treatment plans</li>
-                                <li>Premium quality oils and products</li>
-                                <li>Flexible scheduling options</li>
-                                <li>Competitive pricing</li>
+                                <li>Licensed Skin Therapist (Esthetician) delivering advanced skincare services in a relaxing, rejuvenating environment.</li>
+                                <li>Graduate of the San Francisco Institute of Esthetics and Cosmetology with over a decade of industry experience across esteemed Bay Area spas.</li>
+                                <li>Specializes in anti-aging therapies including LED light therapy, microcurrent, microdermabrasion, oxygen treatments, hydra facials, threading hair removal, full-body waxing, and advanced eyebrow services.</li>
+                                <li>Certified professional with extensive knowledge of leading skincare brands such as Dermalogica, Osmosis, Skin Scripts, and Eminence.</li>
+                                <li>Integrates innovative Korean skincare lines like Ao Medical, Sculplla, and GeneO+ into tailored treatment plans.</li>
                             </ul>
                         </div>
                         
@@ -333,11 +332,32 @@ class SpaApp {
                                         <span class="contact-label">Hours:</span>
                                         <div class="hours-info">
                                             <div class="hours-row">
-                                                <span class="days">Mon-Thu:<span class="times">10:00 AM - 6:00 PM</span></span>
+                                                <span class="days">Monday:</span>
+                                                <span class="times">10:00 AM - 5:00 PM</span>
                                             </div>
                                             <div class="hours-row">
-                                                <span class="days">Fri-Sun:<span class="times">9:00 AM - 5:00 PM</span></span>
-                                                
+                                                <span class="days">Tuesday:</span>
+                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Wednesday:</span>
+                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Thursday:</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Friday:</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Saturday:</span>
+                                                <span class="times">12:00 PM - 6:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Sunday:</span>
+                                                <span class="times">10:00 AM - 5:00 PM</span>
                                             </div>
                                         </div>
                                     </div>
@@ -351,6 +371,11 @@ class SpaApp {
                                     <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                                 </div>
+                            </div>
+
+                            <div class="policy-section fade-in">
+                                <h4>Cancellation Policy</h4>
+                                <p>We will charge a 50% cancellation fee for any no-show or cancellations within 24 hours of the scheduled appointment.</p>
                             </div>
                         </div>
                     </div>

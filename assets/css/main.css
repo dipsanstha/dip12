@@ -90,7 +90,6 @@ p {
     font-family: var(--font-secondary);
     font-weight: 500;
     text-align: center;
-    cursor: pointer;
     transition: var(--transition);
     font-size: 1rem;
     line-height: 1;
@@ -109,18 +108,178 @@ p {
     box-shadow: var(--box-shadow-hover);
 }
 
-.btn-secondary {
-     background-color: rgba(210, 188, 188, 0.4);
-    color: var(--primary-dark);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 2px solid var(--primary-color);
-
+/* Book Now Button Styles */
+/* Enhanced Book Now Button */
+.btn-booking {
+    display: inline-block;
+    background: linear-gradient(135deg, #ecc51b, #d45a2a);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(220, 90, 42, 0.3);
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
+/* Hover Effect */
+.btn-booking:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 90, 42, 0.4);
+    color: #fff;
+}
+
+/* Active/Pressed Effect */
+.btn-booking:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(220, 90, 42, 0.3);
+}
+
+/* Pulsing Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.btn-booking {
+    animation: pulse 3s infinite;
+}
+
+/* Shine Effect */
+.btn-booking::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.btn-booking:hover::after {
+    left: 100%;
+    opacity: 1;
+}
+
+/* Icon styling */
+.btn-booking i {
+    margin-right: 8px;
+    font-size: 0.9em;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-booking {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Specific styles for nav book now button */
+.nav-link.book-now {
+    background: linear-gradient(135deg, #ecc51b, #d45a2a);
+    color: #fff !important;
+    padding: 10px 25px !important;
+    border-radius: 30px;
+    margin-left: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(220, 90, 42, 0.3);
+    border: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transform: translateZ(0);
+}
+
+/* Hover Effect */
+.nav-link.book-now:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(220, 90, 42, 0.4);
+    color: #fff !important;
+}
+
+/* Active/Pressed Effect */
+.nav-link.book-now:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(220, 90, 42, 0.3);
+}
+
+/* Pulsing Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.nav-link.book-now {
+    animation: pulse 3s infinite;
+}
+
+/* Shine Effect */
+.nav-link.book-now::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.nav-link.book-now:hover::after {
+    left: 100%;
+    opacity: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+    .nav-link.book-now {
+        margin: 15px 0 0 0;
+        width: 100%;
+        text-align: center;
+        padding: 12px 25px !important;
+        display: block;
+    }
+}
+.btn-secondary{
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px;
+    border-radius: 9rem;
+}
 .btn-secondary:hover {
      background-color: rgba(232, 224, 224, 0.1);
-    color: whitesmoke;
+    color: rgb(236, 236, 231);
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-hover);
 }
@@ -245,6 +404,62 @@ main {
     background-color: rgba(247, 191, 25, 0.15);
 }
 
+.category-filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.filter-select {
+    padding: 0.65rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    background-color: var(--light-bg);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.15);
+}
+
+@media (max-width: 768px) {
+    .category-filter {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        text-align: left;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .filter-label {
+        font-size: 0.9rem;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -274,7 +489,69 @@ main {
 
 .service-card h3 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Service Card Booking Button */
+.service-card .btn-booking {
+    display: inline-block;
+    background: linear-gradient(135deg, #ecc51b, #d45a2a);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-top: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(220, 90, 42, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.service-card .btn-booking:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 90, 42, 0.4);
+    color: #fff;
+}
+
+.service-card .btn-booking i {
+    margin-right: 5px;
+}
+
+.service-card-bg .btn-booking {
+    display: inline-block;
+    background: linear-gradient(135deg, #ecc51b, #d45a2a);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-top: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.service-card-bg .btn-booking:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.service-card-bg .btn-booking i {
+    margin-right: 5px;
+}
+
+.service-card p, .service-card-bg p {
+    min-height: 60px;
+    margin-bottom: 10px;
 }
 
 /* About Section */

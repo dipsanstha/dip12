@@ -1,3 +1,5 @@
+import { servicesByCategory } from './servicesData.js';
+
 // Main JavaScript for Spa Massage Website SPA
 class SpaApp {
     constructor() {
@@ -10,6 +12,8 @@ class SpaApp {
             'contact': this.renderContact,
             
         };
+
+        this.selectedServiceCategory = 'all';
         
         this.init();
     }
@@ -100,24 +104,29 @@ class SpaApp {
                         <p>Experience ultimate relaxation and rejuvenation with our premium spa and massage services. Your journey to wellness begins here.</p>
                         <div class="hero-buttons">
                             <a href="#services" class="btn btn-secondary" data-link>View Services</a>
+                            <a href="https://skincarebylaxmi.glossgenius.com/" class="btn btn-booking" target="_blank" rel="noopener noreferrer">
+                                <i class="far fa-calendar-alt"></i> Book Now
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
-
             <section class="services">
                 <div class="container">
                     <h2 class="text-center fade-in">Our Featured Services</h2>
                     <div class="services-grid">
                         <div class="service-card fade-in">
                             <div class="service-image">
-                                <img src="public/images/services/OIP.jpg" alt="Laxmi’s Facial Special" loading="lazy">
+                                <img src="public/images/services/OIP.jpg" alt="Laxmi's Facial Special" loading="lazy">
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-spa"></i>
                             </div>
                             <h3>Laxmi's Facial Special</h3>
                             <p>Indulge in our luxurious facial treatment, now at a discounted price for a limited time.</p>
+                            <a href="https://skincarebylaxmi.glossgenius.com/" class="btn-booking" target="_blank">
+                                <i class="far fa-calendar-alt"></i> Book Now
+                            </a>
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
@@ -128,6 +137,9 @@ class SpaApp {
                             </div>
                             <h3>Microdermabrasion</h3>
                             <p>Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.</p>
+                            <a href="https://skincarebylaxmi.glossgenius.com/" class="btn-booking" target="_blank">
+                                <i class="far fa-calendar-alt"></i> Book Now
+                            </a>
                         </div>
                         <div class="service-card fade-in">
                             <div class="service-image">
@@ -138,477 +150,107 @@ class SpaApp {
                             </div>
                            <h3>Lash Lift</h3>
                             <p>Lift and curl your lashes for a natural, wide-eyed look.</p>
+                            <a href="https://skincarebylaxmi.glossgenius.com/" class="btn-booking" target="_blank">
+                                <i class="far fa-calendar-alt"></i> Book Now
+                            </a>
                         </div>
                     </div>
                 </div>
-            </section>
-        `;
+            </section>`;
         
         this.initAnimations();
     }
-renderServices() {
-    const mainContent = document.getElementById('main-content');
-    mainContent.innerHTML = `
-        <section class="services">
-            <div class="container">
-                <h1 class="text-center fade-in">Our Services</h1>
-                <p class="text-center fade-in">Explore our range of luxurious treatments designed to help you relax, unwind, and rejuvenate.</p>
-                
-                <div class="services-grid">
-                    <!-- Facial Services -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Custom Facial</h3>
-                            <p>Personalized facial to address your unique skin needs and provide a radiant glow.</p>
-                            <strong>$85 | 55 min</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Laxmi’s Facial Special</h3>
-                            <p>Indulge in our luxurious facial treatment, now at a discounted price for a limited time.</p>
-                            <strong>$190 (Now $150) | 75 min</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/swedish-massage.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Microchanneling Special</h3>
-                            <p>Enhance your skin's texture with our microchanneling treatment, ideal for reducing fine lines and scars.</p>
-                            <strong>$225 | 60 min</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/dd.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>O2 Derm Oxygen Facial</h3>
-                            <p>Rejuvenate your skin with the oxygen facial, perfect for hydration and revitalization.</p>
-                            <strong>$150 | 65 min</strong>
-                        </div>
-                    </div>
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/acne.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Acne Facial</h3>
-                            <p>Treat acne-prone skin with our specialized acne facial that helps to cleanse, balance, and reduce inflammation.</p>
-                            <strong>$95 | 55 min</strong>
-                        </div>
-                    </div>
+    renderServices() {
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) {
+            return;
+        }
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/glow.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>GlowTox Facelift Facial</h3>
-                            <p>Lift and brighten your face with this signature treatment that promotes youthful radiance and tightens the skin.</p>
-                            <strong>$200 | 70 min</strong>
-                        </div>
-                    </div>
-                    
-                    <!-- Add-On Treatments -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP4.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-fire"></i>
-                            </div>
-                            <h3>Microdermabrasion</h3>
-                            <p>Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.</p>
-                            <strong>$45 | 10 min</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/goat.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-fire"></i>
-                            </div>
-                            <h3>Goat Milk Peel</h3>
-                            <p>A soothing and nourishing peel, perfect for sensitive skin.</p>
-                            <strong>$25 | 10 min</strong>
-                        </div>
-                    </div>
+        const sortedCategories = Object.entries(servicesByCategory).sort(([nameA], [nameB]) => {
+            const matchA = nameA.match(/^(\d+)\./);
+            const matchB = nameB.match(/^(\d+)\./);
+            if (matchA && matchB) {
+                return parseInt(matchA[1], 10) - parseInt(matchB[1], 10);
+            }
+            if (matchA) return -1;
+            if (matchB) return 1;
+            return nameA.localeCompare(nameB);
+        });
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/LED-Light-Therapy-Treatment-1080x675.png') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h3>LED Therapy</h3>
-                            <p>Boost your skin’s healing process with our LED therapy, designed to treat acne, aging, and pigmentation.</p>
-                            <strong>$25 | 15 min</strong>
-                        </div>
-                    </div>
-                    
-                    <!-- Body Treatments -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/pbt.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Purifying Back Treatment</h3>
-                            <p>Cleanse and detoxify your back with this deep-cleansing back treatment.</p>
-                            <strong>$85 | 50 min</strong>
-                        </div>
-                    </div>
+        const categoryOptions = sortedCategories.map(([categoryName]) => {
+            const displayCategoryName = categoryName.replace(/^\d+\.\s*/, '');
+            return `<option value="${categoryName}">${displayCategoryName}</option>`;
+        }).join('');
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/R.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Lash Lift</h3>
-                            <p>Lift and curl your lashes for a natural, wide-eyed look.</p>
-                            <strong>$85 | 50 min</strong>
-                        </div>
-                    </div>
+        const filteredCategories = this.selectedServiceCategory === 'all'
+            ? sortedCategories
+            : sortedCategories.filter(([categoryName]) => categoryName === this.selectedServiceCategory);
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Brow Lamination</h3>
-                            <p>Shape and set your brows for a fuller, more defined look.</p>
-                            <strong>$75 | 50 min</strong>
-                        </div>
-                    </div>
+        const servicesHTML = filteredCategories.map(([categoryName, services]) => {
+            const displayCategoryName = categoryName.replace(/^\d+\.\s*/, '');
 
-                    <!-- Tinting Services -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/OIP2.jpg') center/cover no-repeat;">
+            const cardsHTML = services.map((service) => {
+                const iconClass = service.icon.startsWith('fa-') ? `fas ${service.icon}` : service.icon;
+                return `
+                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/${service.image}') center/cover no-repeat;">
                         <div class="service-content">
                             <div class="service-icon">
-                                <i class="fas fa-eye"></i>
+                                <i class="${iconClass}"></i>
                             </div>
-                            <h3>Lash Tint</h3>
-                            <p>Darken your lashes for a dramatic effect without the need for mascara.</p>
-                            <strong>$20 | 20 min</strong>
+                            <h3>${service.name}</h3>
+                            <p>${service.description}</p>
+                            <strong>${service.price} | ${service.duration}</strong>
                         </div>
                     </div>
+                `;
+            }).join('');
 
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Brow Tint</h3>
-                            <p>Enhance the shape and color of your brows with a custom tinting treatment.</p>
-                            <strong>$20 | 15 min</strong>
-                        </div>
+            return `
+                <div class="category-section">
+                    <h2 class="category-title fade-in">${displayCategoryName}</h2>
+                    <div class="services-grid">
+                        ${cardsHTML}
                     </div>
-
-                    <!-- Waxing Services -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/liwax.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="	fa fa-bullseye"></i>
-                            </div>
-                            <h3>Lip Wax</h3>
-                            <p>Quick and gentle waxing for a smooth and clean upper lip.</p>
-                            <strong>$10 | 10 min</strong>
-                        </div>
-                    </div>
-                    
-                    <!-- Waxing Services Continued -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-bookmark"></i>
-                            </div>
-                            <h3>Brazilian Wax</h3>
-                            <p>Experience a smooth, clean finish with our Brazilian wax treatment.</p>
-                            <strong>$65+ | 30 min</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-bookmark"></i>
-                            </div>
-                            <h3>Brow Wax</h3>
-                            <p>Shape and define your brows with our precise waxing service.</p>
-                            <strong>$25 | 20 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/Facial-Waxing-e1420480171351-1024x920.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-bookmark"></i>
-                            </div>
-                            <h3>Full Face Wax</h3>
-                            <p>Remove unwanted hair from your entire face for smooth, flawless skin.</p>
-                            <strong>$55 | 40 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/d019b8c020ccec881b14fd77bd91b992.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-bookmark"></i>
-                            </div>
-                            <h3>Underarm Wax</h3>
-                            <p>Get smooth underarms with our quick and effective waxing treatment.</p>
-                            <strong>$25 | 15 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-hourglass-2"></i>
-                            </div>
-                            <h3>Bikini Extended</h3>
-                            <p>Remove hair beyond the bikini line for a clean and smooth look.</p>
-                            <strong>$50 | 20 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/chin.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-location-arrow"></i>
-                            </div>
-                            <h3>Chin Wax</h3>
-                            <p>Quick and precise chin waxing for smooth, hair-free skin.</p>
-                            <strong>$10 | 15 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-location-arrow"></i>
-                            </div>
-                            <h3>Nostril Wax</h3>
-                            <p>Quick nostril waxing for a clean and fresh feel.</p>
-                            <strong>$20 | 10 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/leg.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <h3>Half Legs Wax</h3>
-                            <p>Remove hair from your knees down to your ankles for smooth legs.</p>
-                            <strong>$50 | 35 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/legg.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <h3>Full Legs Wax</h3>
-                            <p>Get smooth, hair-free legs from top to bottom.</p>
-                            <strong>$90 | 55 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <h3>Half Arms Wax</h3>
-                            <p>Get smooth arms from your elbows down to your wrists.</p>
-                            <strong>$35 | 30 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/arm.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <h3>Full Arms Wax</h3>
-                            <p>Wax your full arms from wrist to shoulder for smooth skin.</p>
-                            <strong>$60 | 40 min</strong>
-                        </div>
-                    </div>
-
-                    <!-- Threading Services -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/thre.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <h3>Brow Threading</h3>
-                            <p>Shape your brows with precision threading for a flawless look.</p>
-                            <strong>$25 | 20 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-object-ungroup"></i>
-                            </div>
-                            <h3>Brow, Lip, Chin Threading</h3>
-                            <p>Threading service for your brows, lip, and chin for a clean, smooth look.</p>
-                            <strong>$45 | 25 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-object-ungroup"></i>
-                            </div>
-                            <h3>Chin Threading</h3>
-                            <p>Get a perfectly smooth chin with our precise threading service.</p>
-                            <strong>$10 | 10 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/th.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-puzzle-piece"></i>
-                            </div>
-                            <h3>Full Face Threading</h3>
-                            <p>Get rid of unwanted facial hair with our full face threading service.</p>
-                            <strong>$60 | 40 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-puzzle-piece"></i>
-                            </div>
-                            <h3>Neck Threading</h3>
-                            <p>Thread your neck area for a smooth and clean look.</p>
-                            <strong>$20 | 15 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fa fa-leaf"></i>
-                            </div>
-                            <h3>Upper Lip Threading</h3>
-                            <p>Get rid of unwanted upper lip hair with this gentle threading service.</p>
-                            <strong>$10 | 10 min</strong>
-                        </div>
-                    </div>
-
-                    <!-- Gentlemen’s Services -->
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/Gentlemans-Facial_1157432647-LR.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Facial</h3>
-                            <p>A relaxing facial tailored to a gentleman’s skincare needs.</p>
-                            <strong>$120 | 60 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentleman’s Abdomen Wax</h3>
-                            <p>Wax your abdomen area for a clean and smooth finish.</p>
-                            <strong>$35 | 25 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Back Treatment</h3>
-                            <p>A relaxing back treatment to keep your skin smooth and refreshed.</p>
-                            <strong>$90 | 50 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Brow Wax</h3>
-                            <p>Get your brows shaped with precision to create a clean and neat look.</p>
-                            <strong>$25 | 20 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/01604aaa4181323eeb01133d8ee0aff5.png') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Chest Wax</h3>
-                            <p>Experience a smooth chest with our efficient chest waxing treatment.</p>
-                            <strong>$80 | 40 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/services/back-wax.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Full Back Wax</h3>
-                            <p>Get a smooth, hair-free back with our full back waxing service.</p>
-                            <strong>$80 | 60 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Half Back Wax</h3>
-                            <p>Wax your back from shoulders to mid-back for a smoother look.</p>
-                            <strong>$45 | 30 min</strong>
-                        </div>
-                    </div>
-
-                    <div class="service-card-bg fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('public/images/sauna-6766761_1280.jpg') center/cover no-repeat;">
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Gentlemen’s Nostril Wax</h3>
-                            <p>Get rid of unwanted nose hair with our nostril waxing service.</p>
-                            <strong>$20 | 15 min</strong>
-                        </div>
-                    </div>
-
                 </div>
+            `;
+        }).join('');
+
+        const servicesContent = servicesHTML || `
+            <div class="category-section">
+                <p class="text-center fade-in">No services available for the selected category.</p>
             </div>
-        </section>
-    `;   
-    this.initAnimations();
-}
+        `;
+
+        mainContent.innerHTML = `
+            <section class="services">
+                <div class="container">
+                    <h1 class="text-center fade-in">Our Services</h1>
+                    <p class="text-center fade-in">Explore our range of luxurious treatments designed to help you relax, unwind, and rejuvenate.</p>
+                    <div class="category-filter fade-in">
+                        <label for="service-category-filter" class="filter-label">Filter by category:</label>
+                        <select id="service-category-filter" class="filter-select">
+                            <option value="all">All Categories</option>
+                            ${categoryOptions}
+                        </select>
+                    </div>
+                    ${servicesContent}
+                </div>
+            </section>
+        `;
+
+        const categoryFilter = document.getElementById('service-category-filter');
+        if (categoryFilter) {
+            categoryFilter.value = this.selectedServiceCategory;
+            categoryFilter.addEventListener('change', (event) => {
+                this.selectedServiceCategory = event.target.value;
+                this.renderServices();
+            });
+        }
+
+        this.initAnimations();
+    }
+        
 
 
     renderAbout() {

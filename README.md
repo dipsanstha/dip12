@@ -2,7 +2,7 @@
 
 - **Default images** are defined in `src/main.js` within `defaultGalleryImages`.
 - **Custom uploads** are stored in the browser via `localStorage` (`spa-app-gallery-images`).
-- **Admin panel** is locked behind a passphrase prompt (`laxmi!!123`). Click **Admin Login** in the Gallery section, enter the passphrase, and the admin panel will appear below the gallery grid.
+- **Admin panel** is locked behind a passphrase prompt. Click **Admin Login** in the Gallery section, enter the passphrase, and the admin panel will appear below the gallery grid.
 - **Uploading images** supports file uploads (converted to base64) or external URLs. Optional thumbnails default to the main image source.
 - **Lightbox** previews use the full-size image URL (`src`) while thumbnails can use smaller assets for faster grids.
 - **Session persistence**: Admin state is remembered in `localStorage` (`spa-gallery-admin-session`). Use **Log out** at the bottom of the Gallery page to end admin mode.

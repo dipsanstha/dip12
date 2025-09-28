@@ -892,7 +892,8 @@ class SkinCareApp {
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Address:</span>
-                                        <span class="contact-value"><a href="">123 Wellness Avenue<br>Peaceful City, State 12345</a></span>
+                                        <span class="contact-value"><a href="https://www.google.com/maps/place/80+Eureka+Dr+%23136,+Pacifica,+CA+94044,+USA/@37.633884,-122.488792,16z/data=!4m6!3m5!1s0x808f7a54560eff75:0x49e35ccbd343541d!8m2!3d37.6338839!4d-122.4887925!16s%2Fg%2F11ll6tgzzg?hl=en&entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D">80 Eureka Dr #136
+80 Eureka Dr, Pacifica, CA 94044, USA</a></span>
                                     </div>
                                 </div>
                                 

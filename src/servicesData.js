@@ -24,7 +24,7 @@ export const servicesByCategory = {
     '4. Body Treatments': [
         { name: 'Purifying Back Treatment', image: 'pbt.jpg', description: 'Cleanse and detoxify your back with this deep-cleansing back treatment.', price: '$85', duration: '50 min', icon: 'fa-spa' },
         { name: 'Detox Body Scrub', image: 'body-scrub.jpg', description: 'Exfoliate and detoxify your skin with our invigorating body scrub.', price: '$80', duration: '60 min', icon: 'fa-spa' },
-        { name: 'Oxygen Infusion Facial', image: 'oxygen-facial.jpg', description: 'Revitalize your skin with oxygen and nutrient-rich serums.', price: '$150', duration: '60 min', icon: 'fa-spa' }
+        { name: 'Hyaluronic Acid Infusion', image: 'oxygen-facial.jpg', description: 'Hydrate and plump your skin with our hyaluronic acid infusion treatment.', price: '$120', duration: '60 min', icon: 'fa-spa' }
     ],
     '5. Waxing Services - Face': [
         { name: 'Eyebrow Wax', image: 'liwax.jpg', description: 'Shape and define your brows with our precise waxing service.', price: '$25', duration: '15 min', icon: 'fa-bullseye' },

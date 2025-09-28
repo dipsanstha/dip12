@@ -901,7 +901,7 @@ class SkinCareApp {
                                     <i class="fas fa-phone"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Phone:</span>
-                                        <span class="contact-value"><a href="tel:+1-14159679554">+1-14159679554</a></span>
+                                        <span class="contact-value"><a href="tel:+1-415-967-9554">+1-415-967-9554</a></span>
                                     </div>
                                 </div>
                                 
@@ -909,7 +909,7 @@ class SkinCareApp {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value"><a href="mailto:laxmi_sanu@yahoo.com">laxmi_sanu@yahoo.com</a></span>
+                                        <span class="contact-value"><a href="mailto:laxmi_sanu2@yahoo.com">laxmi_sanu2@yahoo.com</a></span>
                                     </div>
                                 </div>
                                 
@@ -922,14 +922,7 @@ class SkinCareApp {
                                                 <span class="days">Monday:</span>
                                                 <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
-                                            <div class="hours-row">
-                                                <span class="days">Tuesday:</span>
-                                                <span class="times">10:00 AM - 6:00 PM</span>
-                                            </div>
-                                            <div class="hours-row">
-                                                <span class="days">Wednesday:</span>
-                                                <span class="times">10:00 AM - 6:00 PM</span>
-                                            </div>
+                                           
                                             <div class="hours-row">
                                                 <span class="days">Thursday:</span>
                                                 <span class="times">10:00 AM - 6:00 PM</span>
@@ -941,6 +934,10 @@ class SkinCareApp {
                                             <div class="hours-row">
                                                 <span class="days">Saturday:</span>
                                                 <span class="times">11:00 PM - 6:00 PM</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Sunday:</span>
+                                                <span class="times">Closed</span>
                                             </div>
                                         </div>
                                     </div>

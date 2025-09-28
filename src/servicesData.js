@@ -17,14 +17,14 @@ export const servicesByCategory = {
     '3. Lash & Brow Services': [
         { name: 'Lash Lift', image: 'R.jpg', description: 'Lift and curl your lashes for a natural, wide-eyed look.', price: '$85', duration: '50 min', icon: 'fa-eye' },
         { name: 'Brow Lamination', image: 'sauna-6766761_1280.jpg', description: 'Shape and set your brows for a fuller, more defined look.', price: '$75', duration: '50 min', icon: 'fa-eye' },
-        { name: 'Lash Tint', image: 'OIP2.jpg', description: 'Darken your lashes for a dramatic effect without the need for mascara.', price: '$20', duration: '20 min', icon: 'fa-eye' },
+        { name: 'Lash Tint', image: 'lashtint.jpg', description: 'Darken your lashes for a dramatic effect without the need for mascara.', price: '$20', duration: '20 min', icon: 'fa-eye' },
         { name: 'Brow Tint', image: 'sauna-6766761_1280.jpg', description: 'Enhance the shape and color of your brows with a custom tinting treatment.', price: '$20', duration: '15 min', icon: 'fa-eye' },
         { name: 'Brow + Lash Tint Combo', image: 'brow-lash-combo.jpg', description: 'Enhance both your brows and lashes with our combined tinting treatment.', price: '$35', duration: '30 min', icon: 'fa-eye' }
     ],
     '4. Body Treatments': [
         { name: 'Purifying Back Treatment', image: 'pbt.jpg', description: 'Cleanse and detoxify your back with this deep-cleansing back treatment.', price: '$85', duration: '50 min', icon: 'fa-spa' },
         { name: 'Detox Body Scrub', image: 'body-scrub.jpg', description: 'Exfoliate and detoxify your skin with our invigorating body scrub.', price: '$80', duration: '60 min', icon: 'fa-spa' },
-        { name: 'Hyaluronic Acid Infusion', image: 'oxygen-facial.jpg', description: 'Hydrate and plump your skin with our hyaluronic acid infusion treatment.', price: '$120', duration: '60 min', icon: 'fa-spa' }
+        { name: 'Hyaluronic Acid Infusion', image: 'hyaluronic.jpg', description: 'Hydrate and plump your skin with our hyaluronic acid infusion treatment.', price: '$120', duration: '60 min', icon: 'fa-spa' }
     ],
     '5. Waxing Services - Face': [
         { name: 'Eyebrow Wax', image: 'liwax.jpg', description: 'Shape and define your brows with our precise waxing service.', price: '$25', duration: '15 min', icon: 'fa-bullseye' },

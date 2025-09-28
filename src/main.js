@@ -8,12 +8,40 @@ class SpaApp {
             '': this.renderHome,
             'home': this.renderHome,
             'services': this.renderServices,
+            'gallery': this.renderGallery,
+            'reviews': this.renderReviews,
             'about': this.renderAbout,
             'contact': this.renderContact,
             
         };
 
         this.selectedServiceCategory = 'all';
+        this.serviceSearchQuery = '';
+        this.bookingUrl = 'https://skincarebylaxmi.glossgenius.com/';
+        this.selectedGalleryCategory = 'all';
+        this.galleryStorageKey = 'spa-app-gallery-images';
+        this.defaultGalleryImages = [
+            { src: 'public/images/photo-1519823551278-64ac92734fb1.jpg', alt: 'Luxurious facial treatment in progress', category: 'Treatments' },
+           
+        ];
+        this.customGalleryImages = this.loadStoredGalleryImages();
+        this.galleryImages = [];
+
+        this.reviewStorageKey = 'spa-app-reviews';
+        this.testimonials = [
+            { name: 'Priya S.', rating: 5, quote: 'My skin has never felt better! The personalized care and attention to detail made the experience unforgettable.', date: '2024-11-15' },
+            { name: 'Emily R.', rating: 5, quote: 'The ambience is so calming and every treatment feels luxurious. Highly recommend the signature facial!', date: '2025-01-03' },
+            { name: 'Monica D.', rating: 4, quote: 'Wonderful service and results. The team is knowledgeable and genuinely cares about your skin health.', date: '2025-02-20' }
+        ];
+        this.reviews = this.loadStoredReviews();
+        this.pendingReviewFeedback = null;
+        this.boundLightboxKeydownHandler = null;
+        this.galleryAdminOpen = false;
+        this.pendingGalleryAdminFeedback = null;
+        this.galleryAdminSessionKey = 'spa-gallery-admin-session';
+        this.galleryAdminSecret = 'bGF4bWkhITEyMw=='; // Base64 encoded passphrase 'laxmi!!123'
+        this.isGalleryAdmin = this.loadGalleryAdminSession();
+
         
         this.init();
     }
@@ -30,6 +58,9 @@ class SpaApp {
         
         // Initialize animations
         this.initAnimations();
+
+        // Prepare gallery images after initialisation
+        this.refreshGalleryImages();
     }
 
     initNavigation() {
@@ -81,6 +112,210 @@ class SpaApp {
         }
     }
 
+    renderAdminGalleryList() {
+        if (!this.customGalleryImages.length) {
+            return '<p class="no-custom-images">No custom images added yet.</p>';
+        }
+
+        return this.customGalleryImages.map((image, index) => {
+            const sourceLabel = image.sourceType === 'upload' ? 'Uploaded image' : 'External URL';
+            const fileName = image.originalName ? ` (${image.originalName})` : '';
+            const addedOn = image.createdAt ? this.formatReviewDate(image.createdAt) : 'Recently';
+            const viewLabel = image.sourceType === 'upload' ? 'Preview' : 'View';
+            return `
+            <div class="gallery-admin-item" data-index="${index}">
+                <div class="gallery-admin-thumb">
+                    <img src="${image.thumbnail || image.src}" alt="${image.alt}">
+                </div>
+                <div class="gallery-admin-details">
+                    <p><strong>Alt:</strong> ${image.alt}</p>
+                    <p><strong>Category:</strong> ${image.category}</p>
+                    <div class="gallery-admin-meta">
+                        <span><strong>Source:</strong> ${sourceLabel}${fileName}</span>
+                        <span><strong>Added:</strong> ${addedOn}</span>
+                        <a href="${image.src}" target="_blank" rel="noopener noreferrer">${viewLabel}</a>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary gallery-admin-remove" data-remove-index="${index}">
+                    Remove
+                </button>
+            </div>
+        `;
+        }).join('');
+    }
+
+    initGalleryAdmin() {
+        const loginButton = document.getElementById('gallery-admin-login');
+        if (loginButton && !this.isGalleryAdmin) {
+            loginButton.addEventListener('click', () => {
+                this.promptGalleryAdminLogin();
+            });
+        }
+
+        const logoutButton = document.getElementById('gallery-admin-logout');
+        if (logoutButton && this.isGalleryAdmin) {
+            logoutButton.addEventListener('click', () => {
+                this.isGalleryAdmin = false;
+                this.galleryAdminOpen = false;
+                this.saveGalleryAdminSession(false);
+                this.pendingGalleryAdminFeedback = {
+                    message: 'Logged out from admin mode.',
+                    isSuccess: true
+                };
+                this.renderGallery();
+            });
+        }
+
+        if (!this.isGalleryAdmin) {
+            return;
+        }
+
+        const toggleButton = document.getElementById('gallery-admin-toggle');
+        if (toggleButton) {
+            toggleButton.addEventListener('click', () => {
+                this.galleryAdminOpen = !this.galleryAdminOpen;
+                this.renderGallery();
+            });
+        }
+
+        const adminPanel = document.getElementById('gallery-admin-panel');
+        if (!adminPanel) {
+            return;
+        }
+
+        const form = document.getElementById('gallery-admin-form');
+        if (form) {
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                await this.handleGalleryAdminSubmit(form);
+            });
+        }
+
+        const listContainer = document.getElementById('gallery-admin-list');
+        if (listContainer) {
+            listContainer.addEventListener('click', (event) => {
+                const removeButton = event.target.closest('[data-remove-index]');
+                if (!removeButton) {
+                    return;
+                }
+                const index = Number(removeButton.getAttribute('data-remove-index'));
+                if (Number.isNaN(index)) {
+                    return;
+                }
+                this.removeCustomGalleryImage(index);
+            });
+        }
+    }
+
+    async handleGalleryAdminSubmit(form) {
+        const formData = new FormData(form);
+        const file = formData.get('file');
+        const srcInput = (formData.get('src') || '').toString().trim();
+        const alt = (formData.get('alt') || '').toString().trim();
+        const category = (formData.get('category') || '').toString().trim();
+        const thumbnailInput = (formData.get('thumbnail') || '').toString().trim();
+
+        if (!alt || !category) {
+            this.setGalleryAdminFeedback('Please provide both a description and a category.', false);
+            return;
+        }
+
+        const hasFile = file instanceof File && file.size > 0;
+        if (!hasFile && !srcInput) {
+            this.setGalleryAdminFeedback('Upload an image or provide an image URL.', false);
+            return;
+        }
+
+        let imageSource = '';
+        let sourceType = 'url';
+        let originalName;
+
+        if (hasFile) {
+            try {
+                imageSource = await this.readFileAsDataUrl(file);
+            } catch (error) {
+                this.setGalleryAdminFeedback('Unable to read the selected file. Please try another image.', false);
+                return;
+            }
+            sourceType = 'upload';
+            originalName = file.name;
+        } else {
+            try {
+                new URL(srcInput);
+            } catch (error) {
+                this.setGalleryAdminFeedback('Please enter a valid image URL.', false);
+                return;
+            }
+            imageSource = srcInput;
+        }
+
+        let finalThumbnail = thumbnailInput;
+        if (thumbnailInput) {
+            try {
+                new URL(thumbnailInput);
+            } catch (error) {
+                this.setGalleryAdminFeedback('Please enter a valid thumbnail URL.', false);
+                return;
+            }
+        } else {
+            finalThumbnail = imageSource;
+        }
+
+        const newImage = {
+            src: imageSource,
+            alt,
+            category,
+            thumbnail: finalThumbnail || undefined,
+            sourceType,
+            originalName,
+            createdAt: new Date().toISOString()
+        };
+
+        this.customGalleryImages = [newImage, ...this.customGalleryImages];
+        this.saveGalleryImages();
+        this.refreshGalleryImages();
+        this.pendingGalleryAdminFeedback = {
+            message: 'Image added successfully to the gallery.',
+            isSuccess: true
+        };
+        this.renderGallery();
+    }
+
+    removeCustomGalleryImage(index) {
+        if (index < 0 || index >= this.customGalleryImages.length) {
+            return;
+        }
+
+        this.customGalleryImages.splice(index, 1);
+        this.saveGalleryImages();
+        this.refreshGalleryImages();
+        this.pendingGalleryAdminFeedback = {
+            message: 'Custom image removed.',
+            isSuccess: true
+        };
+        this.renderGallery();
+    }
+
+    setGalleryAdminFeedback(message, isSuccess) {
+        this.pendingGalleryAdminFeedback = { message, isSuccess };
+        this.showPendingGalleryAdminFeedback();
+    }
+
+    showPendingGalleryAdminFeedback() {
+        if (!this.pendingGalleryAdminFeedback) {
+            return;
+        }
+
+        const feedback = document.getElementById('gallery-admin-feedback');
+        if (feedback) {
+            feedback.textContent = this.pendingGalleryAdminFeedback.message;
+            feedback.classList.toggle('success', this.pendingGalleryAdminFeedback.isSuccess);
+            feedback.classList.toggle('error', !this.pendingGalleryAdminFeedback.isSuccess);
+        }
+
+        this.pendingGalleryAdminFeedback = null;
+    }
+
     updateActiveNavLink(route) {
         // Remove active class from all nav links
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -95,7 +330,32 @@ class SpaApp {
     }
 
     renderHome() {
+        this.refreshGalleryImages();
         const mainContent = document.getElementById('main-content');
+        const galleryItems = this.galleryImages.slice(0, 6).map((image) => {
+            const imageSrc = image.thumbnail || image.src;
+            return `
+            <figure class="gallery-item fade-in">
+                <img src="${imageSrc}" alt="${image.alt}" loading="lazy">
+            </figure>
+        `;
+        }).join('');
+
+        const testimonialsHTML = this.testimonials.map((review) => {
+            const cappedRating = Math.max(0, Math.min(5, review.rating));
+            const stars = Array.from({ length: cappedRating })
+                .map(() => '<i class="fas fa-star" aria-hidden="true"></i>')
+                .join('');
+
+            return `
+                <article class="testimonial-card fade-in">
+                    <div class="testimonial-rating" aria-label="${review.rating} out of 5 stars">${stars}</div>
+                    <p class="testimonial-quote">“${review.quote}”</p>
+                    <p class="testimonial-name">${review.name}</p>
+                </article>
+            `;
+        }).join('');
+
         mainContent.innerHTML = `
             <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('public/images/hero-background.jpg') center/cover no-repeat;">
                 <div class="container">
@@ -137,7 +397,7 @@ class SpaApp {
                             </div>
                             <h3>Microdermabrasion</h3>
                             <p>Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.</p>
-                            <a href="https://skincarebylaxmi.glossgenius.com/" class="btn-booking" target="_blank">
+                            <a href="https://skincarebylaxmi.glossgenius.com/services" class="btn-booking" target="_blank">
                                 <i class="far fa-calendar-alt"></i> Book Now
                             </a>
                         </div>
@@ -156,7 +416,31 @@ class SpaApp {
                         </div>
                     </div>
                 </div>
-            </section>`;
+            </section>
+            <section class="gallery-section">
+                <div class="container">
+                    <h2 class="text-center fade-in">Gallery</h2>
+                    <p class="text-center fade-in gallery-intro">A glimpse into our serene studio and rejuvenating treatments.</p>
+                    <div class="gallery-grid">
+                        ${galleryItems}
+                    </div>
+                    <div class="gallery-cta text-center">
+                        <a href="#gallery" class="btn btn-primary" data-link>View Full Gallery</a>
+                    </div>
+                </div>
+            </section>
+            <section class="testimonial-section">
+                <div class="container">
+                    <h2 class="text-center fade-in">Client Reviews</h2>
+                    <p class="text-center fade-in testimonial-intro">Hear from our guests about their experiences at Skin Care by Laxmi.</p>
+                    <div class="testimonials-grid">
+                        ${testimonialsHTML}
+                    </div>
+                </div>
+            </section>
+            <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159.651539454785!2d-122.49098114669323!3d37.63388370001684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7a54560eff75%3A0x49e35ccbd343541d!2s80%20Eureka%20Dr%20%23136%2C%20Pacifica%2C%20CA%2094044%2C%20USA!5e0!3m2!1sen!2snp!4v1758955751221!5m2!1sen!2snp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>`;
         
         this.initAnimations();
     }
@@ -187,7 +471,25 @@ class SpaApp {
             ? sortedCategories
             : sortedCategories.filter(([categoryName]) => categoryName === this.selectedServiceCategory);
 
-        const servicesHTML = filteredCategories.map(([categoryName, services]) => {
+        const searchQuery = this.serviceSearchQuery.trim().toLowerCase();
+
+        const categoriesWithServices = filteredCategories
+            .map(([categoryName, services]) => {
+                if (!searchQuery) {
+                    return [categoryName, services];
+                }
+
+                const matchingServices = services.filter((service) => {
+                    const nameMatch = service.name.toLowerCase().includes(searchQuery);
+                    const descriptionMatch = service.description.toLowerCase().includes(searchQuery);
+                    return nameMatch || descriptionMatch;
+                });
+
+                return [categoryName, matchingServices];
+            })
+            .filter(([, services]) => services.length > 0);
+
+        const servicesHTML = categoriesWithServices.map(([categoryName, services]) => {
             const displayCategoryName = categoryName.replace(/^\d+\.\s*/, '');
 
             const cardsHTML = services.map((service) => {
@@ -201,6 +503,9 @@ class SpaApp {
                             <h3>${service.name}</h3>
                             <p>${service.description}</p>
                             <strong>${service.price} | ${service.duration}</strong>
+                            <a href="${this.bookingUrl}" class="btn-booking" target="_blank" rel="noopener noreferrer">
+                                <i class="far fa-calendar-alt"></i> Book Now
+                            </a>
                         </div>
                     </div>
                 `;
@@ -218,7 +523,7 @@ class SpaApp {
 
         const servicesContent = servicesHTML || `
             <div class="category-section">
-                <p class="text-center fade-in">No services available for the selected category.</p>
+                <p class="text-center fade-in">No services match your current filters.</p>
             </div>
         `;
 
@@ -227,12 +532,18 @@ class SpaApp {
                 <div class="container">
                     <h1 class="text-center fade-in">Our Services</h1>
                     <p class="text-center fade-in">Explore our range of luxurious treatments designed to help you relax, unwind, and rejuvenate.</p>
-                    <div class="category-filter fade-in">
-                        <label for="service-category-filter" class="filter-label">Filter by category:</label>
-                        <select id="service-category-filter" class="filter-select">
-                            <option value="all">All Categories</option>
-                            ${categoryOptions}
-                        </select>
+                    <div class="services-controls fade-in">
+                        <div class="category-filter">
+                            <label for="service-category-filter" class="filter-label">Filter by category:</label>
+                            <select id="service-category-filter" class="filter-select">
+                                <option value="all">All Categories</option>
+                                ${categoryOptions}
+                            </select>
+                        </div>
+                        <div class="search-filter">
+                            <label for="service-search" class="filter-label">Search services:</label>
+                            <input type="search" id="service-search" class="filter-input" placeholder="Search by name or description" aria-label="Search services">
+                        </div>
                     </div>
                     ${servicesContent}
                 </div>
@@ -248,10 +559,229 @@ class SpaApp {
             });
         }
 
+        const serviceSearchInput = document.getElementById('service-search');
+        if (serviceSearchInput) {
+            serviceSearchInput.value = this.serviceSearchQuery;
+            serviceSearchInput.addEventListener('input', (event) => {
+                this.serviceSearchQuery = event.target.value;
+                this.renderServices();
+            });
+        }
+
         this.initAnimations();
     }
-        
+    
+    renderGallery() {
+        this.refreshGalleryImages();
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) {
+            return;
+        }
 
+        const categories = ['all', ...new Set(this.galleryImages.map((image) => image.category))];
+        const filteredImages = this.selectedGalleryCategory === 'all'
+            ? this.galleryImages
+            : this.galleryImages.filter((image) => image.category === this.selectedGalleryCategory);
+
+        const filterButtons = categories.map((category) => {
+            const isActive = category === this.selectedGalleryCategory ? 'active' : '';
+            const label = category === 'all' ? 'All' : category;
+            return `<button type="button" class="filter-btn ${isActive}" data-category="${category}">${label}</button>`;
+        }).join('');
+
+        const galleryGrid = filteredImages.map((image, index) => {
+            const imageSrc = image.thumbnail || image.src;
+            return `
+            <figure class="gallery-card fade-in" data-src="${image.src}" data-alt="${image.alt}" data-index="${index}">
+                <img src="${imageSrc}" alt="${image.alt}" loading="lazy">
+                <figcaption>${image.alt}</figcaption>
+            </figure>
+        `;
+        }).join('');
+
+        const galleryMarkup = galleryGrid || `
+            <p class="text-center fade-in">No images found for this category.</p>
+        `;
+
+        const adminPanelMarkup = this.isGalleryAdmin ? `
+                    <section id="gallery-admin-panel" class="gallery-admin-panel ${this.galleryAdminOpen ? 'open' : ''}">
+                        <h2>Gallery Admin</h2>
+                        <p>Add new images to the gallery. Stored locally in your browser.</p>
+                        <form id="gallery-admin-form" class="gallery-admin-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="gallery-image-file">Upload Image</label>
+                                    <input type="file" id="gallery-image-file" name="file" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gallery-image-src">Image URL (optional)</label>
+                                    <input type="url" id="gallery-image-src" name="src" placeholder="https://example.com/image.jpg">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gallery-image-alt">Description (Alt Text)</label>
+                                    <input type="text" id="gallery-image-alt" name="alt" placeholder="Describe the image" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="gallery-image-category">Category</label>
+                                    <input type="text" id="gallery-image-category" name="category" placeholder="Category" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gallery-image-thumb">Optional Thumbnail URL</label>
+                                    <input type="url" id="gallery-image-thumb" name="thumbnail" placeholder="Defaults to image URL or uploaded file">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> Add Image
+                            </button>
+                        </form>
+                        <div class="gallery-admin-feedback" id="gallery-admin-feedback"></div>
+                        <div class="gallery-admin-stored">
+                            <h3>Stored Custom Images (${this.customGalleryImages.length})</h3>
+                            <div id="gallery-admin-list" class="gallery-admin-list">
+                                ${this.renderAdminGalleryList()}
+                            </div>
+                        </div>
+                    </section>
+        ` : '';
+
+        mainContent.innerHTML = `
+            <section class="gallery-page">
+                <div class="container">
+                    <header class="gallery-header fade-in">
+                        <h1>Gallery</h1>
+                        <p>Explore moments from our studio, treatments, and client experiences.</p>
+                    </header>
+                    <div class="gallery-filters" role="tablist">
+                        ${filterButtons}
+                    </div>
+                    <div class="gallery-page-grid">
+                        ${galleryMarkup}
+                    </div>
+                    ${adminPanelMarkup}
+                    <div class="gallery-admin-controls">
+                        ${this.isGalleryAdmin ? `
+                        <button type="button" id="gallery-admin-toggle" class="btn btn-secondary gallery-admin-toggle">
+                            ${this.galleryAdminOpen ? 'Close Admin Panel' : 'Open Admin Panel'}
+                        </button>
+                        <button type="button" id="gallery-admin-logout" class="btn btn-tertiary gallery-admin-logout">
+                            Log out
+                        </button>
+                        ` : `
+                        <button type="button" id="gallery-admin-login" class="btn btn-secondary gallery-admin-toggle">
+                            Admin Login
+                        </button>
+                        `}
+                    </div>
+                </div>
+                <div class="lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+                    <div class="lightbox-content">
+                        <button class="lightbox-close" type="button" aria-label="Close gallery preview">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <img id="lightbox-image" src="" alt="">
+                        <p id="lightbox-caption"></p>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        this.initGalleryInteractions();
+        this.initGalleryAdmin();
+        this.showPendingGalleryAdminFeedback();
+        this.initAnimations();
+    }
+
+    renderReviews() {
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) {
+            return;
+        }
+
+        const reviews = this.reviews.length ? this.reviews : this.testimonials;
+        const averageRating = reviews.length
+            ? (reviews.reduce((total, review) => total + Math.max(0, Math.min(5, Number(review.rating) || 0)), 0) / reviews.length).toFixed(1)
+            : '0.0';
+
+        const reviewsMarkup = reviews.length ? reviews.map((review) => {
+            const cappedRating = Math.max(0, Math.min(5, Number(review.rating) || 0));
+            const stars = Array.from({ length: cappedRating })
+                .map(() => '<i class="fas fa-star" aria-hidden="true"></i>')
+                .join('');
+            const displayDate = review.date ? this.formatReviewDate(review.date) : 'Recently';
+            const message = review.quote || review.message || '';
+            return `
+                <article class="review-card fade-in">
+                    <div class="review-card-header">
+                        <div class="review-rating" aria-label="${cappedRating} out of 5 stars">
+                            ${stars}
+                        </div>
+                        <span class="review-date">${displayDate}</span>
+                    </div>
+                    <p class="review-message">“${message}”</p>
+                    <p class="review-author">${review.name}</p>
+                </article>
+            `;
+        }).join('') : `
+            <p class="text-center fade-in">No reviews yet. Be the first to share your experience.</p>
+        `;
+
+        mainContent.innerHTML = `
+            <section class="reviews-page">
+                <div class="container">
+                    <header class="reviews-header fade-in">
+                        <h1>Client Reviews</h1>
+                        <p>We love hearing from our guests. Share your experience and read what others have to say.</p>
+                    </header>
+                    <section class="review-summary fade-in" aria-label="Average rating">
+                        <div>
+                            <span class="summary-rating">${averageRating}</span>
+                            <span class="summary-out-of">/ 5.0</span>
+                        </div>
+                        <p>${reviews.length} review${reviews.length === 1 ? '' : 's'} shared</p>
+                    </section>
+                    <section class="review-form-section fade-in" aria-labelledby="review-form-title">
+                        <h2 id="review-form-title">Share Your Experience</h2>
+                        <form id="review-form" class="review-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reviewer-name">Full Name</label>
+                                    <input type="text" id="reviewer-name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review-rating">Rating</label>
+                                    <select id="review-rating" name="rating" required>
+                                        <option value="" disabled selected>Select rating</option>
+                                        <option value="5">5 - Excellent</option>
+                                        <option value="4">4 - Great</option>
+                                        <option value="3">3 - Good</option>
+                                        <option value="2">2 - Fair</option>
+                                        <option value="1">1 - Needs improvement</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="review-message">Your Review</label>
+                                <textarea id="review-message" name="message" placeholder="Tell us about your visit" minlength="10" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-review-btn">
+                                <i class="fas fa-paper-plane"></i> Submit Review
+                            </button>
+                            <p class="form-disclaimer">By submitting, you agree to let us display your first name and review on our site.</p>
+                        </form>
+                    </section>
+                    <section class="review-list" aria-live="polite">
+                        ${reviewsMarkup}
+                    </section>
+                </div>
+            </section>
+        `;
+
+        this.initReviewForm();
+        this.showPendingReviewFeedback();
+        this.initAnimations();
+    }
 
     renderAbout() {
         const mainContent = document.getElementById('main-content');
@@ -263,7 +793,6 @@ class SpaApp {
                             <h2>About Skin Care by Laxmi</h2>
                             <p>Founded in 2025, Skin Care by Laxmi has been dedicated to providing exceptional wellness experiences in a tranquil, nurturing environment. Our mission is to help you achieve balance, relaxation, and rejuvenation through our comprehensive range of therapeutic treatments.</p>
                             
-                            <p>Our team of licensed massage therapists and wellness professionals bring years of experience and passion for healing to every session. We believe in the power of touch therapy to not only relax the body but also restore the mind and spirit.</p>
                             
                             <h3>Why Choose Skin Care by Laxmi?</h3>
                             <ul>
@@ -333,15 +862,15 @@ class SpaApp {
                                         <div class="hours-info">
                                             <div class="hours-row">
                                                 <span class="days">Monday:</span>
-                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Tuesday:</span>
-                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Wednesday:</span>
-                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Thursday:</span>
@@ -353,11 +882,7 @@ class SpaApp {
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Saturday:</span>
-                                                <span class="times">12:00 PM - 6:00 PM</span>
-                                            </div>
-                                            <div class="hours-row">
-                                                <span class="days">Sunday:</span>
-                                                <span class="times">10:00 AM - 5:00 PM</span>
+                                                <span class="times">11:00 PM - 6:00 PM</span>
                                             </div>
                                         </div>
                                     </div>
@@ -418,6 +943,67 @@ class SpaApp {
         });
     }
 
+    refreshGalleryImages() {
+        this.galleryImages = [...this.customGalleryImages, ...this.defaultGalleryImages];
+    }
+
+    readFileAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error('Failed to read file.'));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    loadGalleryAdminSession() {
+        try {
+            const stored = window.localStorage.getItem(this.galleryAdminSessionKey);
+            if (!stored) {
+                return false;
+            }
+            const decoded = window.atob(stored);
+            return decoded === window.atob(this.galleryAdminSecret);
+        } catch (error) {
+            console.warn('Failed to read admin session', error);
+            return false;
+        }
+    }
+
+    saveGalleryAdminSession(isAdmin) {
+        if (!isAdmin) {
+            window.localStorage.removeItem(this.galleryAdminSessionKey);
+            return;
+        }
+        try {
+            const value = window.btoa(window.atob(this.galleryAdminSecret));
+            window.localStorage.setItem(this.galleryAdminSessionKey, value);
+        } catch (error) {
+            console.warn('Failed to persist admin session', error);
+        }
+    }
+
+    promptGalleryAdminLogin() {
+        const expectedPassphrase = window.atob(this.galleryAdminSecret);
+        const input = window.prompt('Enter admin passphrase to manage the gallery:');
+        if (input === null) {
+            return;
+        }
+
+        if (input.trim() === expectedPassphrase) {
+            this.isGalleryAdmin = true;
+            this.galleryAdminOpen = true;
+            this.saveGalleryAdminSession(true);
+            this.pendingGalleryAdminFeedback = {
+                message: 'Admin mode enabled. You can now manage gallery images.',
+                isSuccess: true
+            };
+            this.renderGallery();
+        } else {
+            window.alert('Incorrect passphrase. Access denied.');
+        }
+    }
+
     initContactForm() {
         const form = document.getElementById('contact-form');
         if (form) {
@@ -426,6 +1012,234 @@ class SpaApp {
                 this.handleContactSubmit(form);
             });
         }
+    }
+
+    initGalleryInteractions() {
+        const filterContainer = document.querySelector('.gallery-filters');
+        if (filterContainer) {
+            filterContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('.filter-btn');
+                if (!button) {
+                    return;
+                }
+                const category = button.getAttribute('data-category');
+                if (category && category !== this.selectedGalleryCategory) {
+                    this.selectedGalleryCategory = category;
+                    this.renderGallery();
+                }
+            });
+        }
+
+        const galleryGrid = document.querySelectorAll('.gallery-card');
+        const lightbox = document.getElementById('gallery-lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        const openLightbox = (src, alt) => {
+            if (!lightbox || !lightboxImage) {
+                return;
+            }
+            lightboxImage.src = src;
+            lightboxImage.alt = alt;
+            if (lightboxCaption) {
+                lightboxCaption.textContent = alt;
+            }
+            lightbox.classList.add('visible');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeLightbox = () => {
+            if (!lightbox) {
+                return;
+            }
+            lightbox.classList.remove('visible');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        galleryGrid.forEach((card) => {
+            card.addEventListener('click', () => {
+                const src = card.getAttribute('data-src');
+                const alt = card.getAttribute('data-alt');
+                if (src) {
+                    openLightbox(src, alt || 'Gallery image');
+                }
+            });
+        });
+
+        if (lightbox) {
+            if (this.boundLightboxKeydownHandler) {
+                document.removeEventListener('keydown', this.boundLightboxKeydownHandler);
+                this.boundLightboxKeydownHandler = null;
+            }
+
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox || event.target.closest('.lightbox-close')) {
+                    closeLightbox();
+                }
+            });
+
+            this.boundLightboxKeydownHandler = (event) => {
+                if (event.key === 'Escape' && lightbox.classList.contains('visible')) {
+                    closeLightbox();
+                }
+            };
+
+            document.addEventListener('keydown', this.boundLightboxKeydownHandler);
+        }
+    }
+
+    initReviewForm() {
+        const form = document.getElementById('review-form');
+        if (!form) {
+            return;
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.handleReviewSubmit(form);
+        });
+    }
+
+    handleReviewSubmit(form) {
+        const formData = new FormData(form);
+        const name = (formData.get('name') || '').toString().trim();
+        const rating = Number(formData.get('rating'));
+        const message = (formData.get('message') || '').toString().trim();
+
+        if (!name || !message || !(rating >= 1 && rating <= 5)) {
+            this.displayFormFeedback(form, 'Please complete all fields and provide a rating between 1 and 5.', false);
+            return;
+        }
+
+        const newReview = {
+            name,
+            rating,
+            message,
+            date: new Date().toISOString()
+        };
+
+        this.reviews = [newReview, ...this.reviews];
+        this.saveReviews();
+        this.pendingReviewFeedback = {
+            message: 'Thank you for sharing your experience! Your review has been added.',
+            isSuccess: true
+        };
+        this.renderReviews();
+    }
+
+    displayFormFeedback(form, message, isSuccess) {
+        let feedback = form.querySelector('.form-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'form-feedback';
+            form.insertBefore(feedback, form.firstChild);
+        }
+
+        feedback.textContent = message;
+        feedback.classList.toggle('success', isSuccess);
+        feedback.classList.toggle('error', !isSuccess);
+        feedback.setAttribute('role', 'alert');
+
+        if (isSuccess) {
+            setTimeout(() => {
+                if (feedback && feedback.parentElement) {
+                    feedback.remove();
+                }
+            }, 5000);
+        }
+    }
+
+    showPendingReviewFeedback() {
+        if (!this.pendingReviewFeedback) {
+            return;
+        }
+        const form = document.getElementById('review-form');
+        if (form) {
+            this.displayFormFeedback(form, this.pendingReviewFeedback.message, this.pendingReviewFeedback.isSuccess);
+            if (this.pendingReviewFeedback.isSuccess) {
+                form.reset();
+            }
+        }
+        this.pendingReviewFeedback = null;
+    }
+
+    loadStoredReviews() {
+        try {
+            const stored = window.localStorage.getItem(this.reviewStorageKey);
+            if (!stored) {
+                return [...this.testimonials];
+            }
+            const parsed = JSON.parse(stored);
+            if (!Array.isArray(parsed)) {
+                return [...this.testimonials];
+            }
+            return parsed.map((review) => ({
+                ...review,
+                rating: Math.max(0, Math.min(5, Number(review.rating) || 0))
+            }));
+        } catch (error) {
+            console.error('Failed to load saved reviews', error);
+            return [...this.testimonials];
+        }
+    }
+
+    saveReviews() {
+        try {
+            window.localStorage.setItem(this.reviewStorageKey, JSON.stringify(this.reviews));
+        } catch (error) {
+            console.error('Failed to save reviews', error);
+        }
+    }
+
+    loadStoredGalleryImages() {
+        try {
+            const stored = window.localStorage.getItem(this.galleryStorageKey);
+            if (!stored) {
+                return [];
+            }
+            const parsed = JSON.parse(stored);
+            if (!Array.isArray(parsed)) {
+                return [];
+            }
+            return parsed.filter((image) => typeof image === 'object' && image !== null && typeof image.src === 'string')
+                .map((image) => ({
+                    src: image.src,
+                    alt: (image.alt || 'Gallery image').toString(),
+                    category: (image.category || 'Uncategorized').toString(),
+                    thumbnail: typeof image.thumbnail === 'string' ? image.thumbnail : undefined,
+                    sourceType: image.sourceType === 'upload' ? 'upload' : 'url',
+                    originalName: typeof image.originalName === 'string' ? image.originalName : undefined,
+                    createdAt: image.createdAt || new Date().toISOString()
+                }));
+        } catch (error) {
+            console.error('Failed to load gallery images', error);
+            return [];
+        }
+    }
+
+    saveGalleryImages() {
+        try {
+            window.localStorage.setItem(this.galleryStorageKey, JSON.stringify(this.customGalleryImages));
+        } catch (error) {
+            console.error('Failed to save gallery images', error);
+        }
+    }
+
+    formatReviewDate(date) {
+        if (!date) {
+            return 'Recently';
+        }
+        const parsedDate = new Date(date);
+        if (Number.isNaN(parsedDate.getTime())) {
+            return 'Recently';
+        }
+        return parsedDate.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
     }
 
     handleContactSubmit(form) {

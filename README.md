@@ -1,13 +1,14 @@
 # Spa Massage Website - Responsive SPA
 
 A responsive single-page application (SPA) for a spa and massage business built with vanilla HTML, CSS, and JavaScript.
-
 ## Features
 
 - 📱 **Fully Responsive Design** - Works on all devices and screen sizes
 - 🎯 **Single Page Application** - Fast navigation with client-side routing
 - 🎨 **Modern UI/UX** - Clean, elegant design with smooth animations
-- 📝 **Interactive Forms** - Contact and booking forms with validation
+- 📝 **Interactive Forms** - Contact form with validation
+- 🔍 **Smart Service Discovery** - Category filtering combined with live search
+- 📅 **Instant Booking Links** - Every service includes a "Book Now" action
 - 🎭 **Smooth Animations** - Fade-in effects and hover transitions
 - 📱 **Mobile-First Approach** - Optimized for mobile devices
 - ♿ **Accessibility Features** - Proper ARIA labels and semantic HTML
@@ -15,25 +16,18 @@ A responsive single-page application (SPA) for a spa and massage business built 
 ## Pages
 
 - **Home** - Hero section with featured services
-- **Services** - Complete list of spa treatments with pricing
+- **Services** - Filterable and searchable treatments with pricing and booking links
 - **About** - Company information and team details  
 - **Contact** - Contact form and business information
-- **Booking** - Appointment booking form
 
 ## Services Featured
 
-- Deep Tissue Massage
-- Swedish Massage  
-- Hot Stone Therapy
-- Aromatherapy Massage
-- Prenatal Massage
-- Sports Massage
+Services are organized into categories such as facials, add-on treatments, lash & brow care, waxing, threading, and gentlemen's offerings. Each entry includes imagery, descriptions, pricing, durations, and a direct booking shortcut.
 
 ## Technologies Used
 
 - **HTML5** - Semantic markup
 - **CSS3** - Modern styling with CSS Grid and Flexbox
-- **Vanilla JavaScript** - ES6+ features, class-based architecture
 - **Vite** - Build tool and development server
 - **Font Awesome** - Icons
 - **Google Fonts** - Typography (Playfair Display & Inter)

@@ -326,6 +326,7 @@ p {
 
 .nav-logo a h2 {
     color: var(--secondary-color);
+    font-size: 1.6rem;
 }
 
 .nav-menu {

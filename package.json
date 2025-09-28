@@ -1,7 +1,7 @@
 {
-  "name": "spa-massage-website",
+  "name": "skin-care-website",
   "version": "1.0.0",
-  "description": "A responsive single page application for a spa massage business",
+  "description": "A responsive single page application for a skin care business",
   "type": "module",
   "main": "src/main.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "start": "npm run dev",
     "deploy": "npm run build"
   },
-  "keywords": ["spa", "massage", "website", "responsive", "single-page-application"],
+  "keywords": ["skin care", "skincare", "website", "responsive", "single-page-application"],
   "author": "",
   "license": "MIT",
   "devDependencies": {

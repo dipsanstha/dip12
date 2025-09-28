@@ -1,7 +1,7 @@
 import { servicesByCategory } from './servicesData.js';
 
-// Main JavaScript for Spa Massage Website SPA
-class SpaApp {
+// Main JavaScript for Skin Care Website 
+class SkinCareApp {
     constructor() {
         this.currentRoute = '';
         this.routes = {
@@ -19,7 +19,7 @@ class SpaApp {
         this.serviceSearchQuery = '';
         this.bookingUrl = 'https://skincarebylaxmi.glossgenius.com/';
         this.selectedGalleryCategory = 'all';
-        this.galleryStorageKey = 'spa-app-gallery-images';
+        this.galleryStorageKey = 'skincare-app-gallery-images';
         this.defaultGalleryImages = [
             { src: 'public/images/photo-1519823551278-64ac92734fb1.jpg', alt: 'Luxurious facial treatment in progress', category: 'Treatments' },
            
@@ -27,7 +27,7 @@ class SpaApp {
         this.customGalleryImages = this.loadStoredGalleryImages();
         this.galleryImages = [];
 
-        this.reviewStorageKey = 'spa-app-reviews';
+        this.reviewStorageKey = 'skincare-app-reviews';
         this.testimonials = [
             { name: 'Priya S.', rating: 5, quote: 'My skin has never felt better! The personalized care and attention to detail made the experience unforgettable.', date: '2024-11-15' },
             { name: 'Emily R.', rating: 5, quote: 'The ambience is so calming and every treatment feels luxurious. Highly recommend the signature facial!', date: '2025-01-03' },
@@ -38,8 +38,8 @@ class SpaApp {
         this.boundLightboxKeydownHandler = null;
         this.galleryAdminOpen = false;
         this.pendingGalleryAdminFeedback = null;
-        this.galleryAdminSessionKey = 'spa-gallery-admin-session';
-        this.galleryAdminSecret = 'bGF4bWkhITEyMw=='; // Base64 encoded passphrase 'laxmi!!123'
+        this.galleryAdminSessionKey = 'skincare-gallery-admin-session';
+        this.galleryAdminSecret = 'TGF4bWkuYWRtaW5AMTIhIQ=='; // Base64 encoded passphrase 'laxmi.admin@123!!'
         this.isGalleryAdmin = this.loadGalleryAdminSession();
 
         
@@ -361,7 +361,7 @@ class SpaApp {
                 <div class="container">
                     <div class="hero-content fade-in">
                         <h1>Welcome to Skin Care by Laxmi</h1>
-                        <p>Experience ultimate relaxation and rejuvenation with our premium spa and massage services. Your journey to wellness begins here.</p>
+                        <p>Experience ultimate relaxation and rejuvenation with our premium skin care and wellness services. Your journey to radiant confidence begins here.</p>
                         <div class="hero-buttons">
                             <a href="#services" class="btn btn-secondary" data-link>View Services</a>
                             <a href="https://skincarebylaxmi.glossgenius.com/" class="btn btn-booking" target="_blank" rel="noopener noreferrer">
@@ -380,7 +380,7 @@ class SpaApp {
                                 <img src="public/images/services/OIP.jpg" alt="Laxmi's Facial Special" loading="lazy">
                             </div>
                             <div class="service-icon">
-                                <i class="fas fa-spa"></i>
+                                <i class="fas fa-seedling"></i>
                             </div>
                             <h3>Laxmi's Facial Special</h3>
                             <p>Indulge in our luxurious facial treatment, now at a discounted price for a limited time.</p>
@@ -806,7 +806,7 @@ class SpaApp {
                         
                         <div class="about-image fade-in">
                             <div style="background: linear-gradient(135deg, var(--accent-color), var(--light-bg)); height: 400px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); font-size: 4rem;">
-                                <i class="fas fa-spa"></i>
+                                <i class="fas fa-seedling"></i>
                             </div>
                         </div>
                     </div>
@@ -1313,8 +1313,8 @@ class SpaApp {
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new SpaApp();
+    new SkinCareApp();
 });
 
 // Export for potential testing or external use
-export default SpaApp;
+export default SkinCareApp;

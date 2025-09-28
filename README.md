@@ -1,3 +1,12 @@
+## Gallery Admin Guide
+
+- **Default images** are defined in `src/main.js` within `defaultGalleryImages`.
+- **Custom uploads** are stored in the browser via `localStorage` (`spa-app-gallery-images`).
+- **Admin panel** is locked behind a passphrase prompt (`laxmi!!123`). Click **Admin Login** in the Gallery section, enter the passphrase, and the admin panel will appear below the gallery grid.
+- **Uploading images** supports file uploads (converted to base64) or external URLs. Optional thumbnails default to the main image source.
+- **Lightbox** previews use the full-size image URL (`src`) while thumbnails can use smaller assets for faster grids.
+- **Session persistence**: Admin state is remembered in `localStorage` (`spa-gallery-admin-session`). Use **Log out** at the bottom of the Gallery page to end admin mode.
+
 # Spa Massage Website - Responsive SPA
 
 A responsive single-page application (SPA) for a spa and massage business built with vanilla HTML, CSS, and JavaScript.
@@ -12,6 +21,8 @@ A responsive single-page application (SPA) for a spa and massage business built 
 - 🎭 **Smooth Animations** - Fade-in effects and hover transitions
 - 📱 **Mobile-First Approach** - Optimized for mobile devices
 - ♿ **Accessibility Features** - Proper ARIA labels and semantic HTML
+- 🖼️ **Dynamic Gallery** - Filterable gallery with persistent custom uploads and lightbox previews
+- 🔐 **Admin Panel** - Password-protected gallery management with local browser storage
 
 ## Pages
 
@@ -19,6 +30,7 @@ A responsive single-page application (SPA) for a spa and massage business built 
 - **Services** - Filterable and searchable treatments with pricing and booking links
 - **About** - Company information and team details  
 - **Contact** - Contact form and business information
+- **Gallery** - Category filters, lightbox previews, and admin-only management tools
 
 ## Services Featured
 
@@ -104,6 +116,7 @@ The color scheme can be modified in `assets/css/main.css` by updating the CSS cu
 - Update business information in `src/main.js`
 - Modify services and pricing in the `renderServices()` method
 - Change contact details in `renderContact()` and `renderBooking()` methods
+- Configure gallery defaults in `defaultGalleryImages` and manage admin settings in `renderGallery()`
 
 ### Styling
 - Main styles: `assets/css/main.css`

@@ -17,6 +17,9 @@ class SkinCareApp {
 
         this.selectedServiceCategory = 'all';
         this.serviceSearchQuery = '';
+        this.serviceSearchFocused = false;
+        this.serviceSearchCaret = null;
+        this.serviceSearchDebounce = null;
         this.bookingUrl = 'https://skincarebylaxmi.glossgenius.com/';
         this.selectedGalleryCategory = 'all';
         this.galleryStorageKey = 'skincare-app-gallery-images';
@@ -467,29 +470,31 @@ class SkinCareApp {
             return `<option value="${categoryName}">${displayCategoryName}</option>`;
         }).join('');
 
-        const filteredCategories = this.selectedServiceCategory === 'all'
-            ? sortedCategories
-            : sortedCategories.filter(([categoryName]) => categoryName === this.selectedServiceCategory);
+        const filterCategories = (query) => {
+            const filteredCategories = this.selectedServiceCategory === 'all'
+                ? sortedCategories
+                : sortedCategories.filter(([categoryName]) => categoryName === this.selectedServiceCategory);
 
-        const searchQuery = this.serviceSearchQuery.trim().toLowerCase();
+            const searchQuery = (query ?? this.serviceSearchQuery).trim().toLowerCase();
 
-        const categoriesWithServices = filteredCategories
-            .map(([categoryName, services]) => {
-                if (!searchQuery) {
-                    return [categoryName, services];
-                }
+            return filteredCategories
+                .map(([categoryName, services]) => {
+                    if (!searchQuery) {
+                        return [categoryName, services];
+                    }
 
-                const matchingServices = services.filter((service) => {
-                    const nameMatch = service.name.toLowerCase().includes(searchQuery);
-                    const descriptionMatch = service.description.toLowerCase().includes(searchQuery);
-                    return nameMatch || descriptionMatch;
-                });
+                    const matchingServices = services.filter((service) => {
+                        const nameMatch = service.name.toLowerCase().includes(searchQuery);
+                        const descriptionMatch = service.description.toLowerCase().includes(searchQuery);
+                        return nameMatch || descriptionMatch;
+                    });
 
-                return [categoryName, matchingServices];
-            })
-            .filter(([, services]) => services.length > 0);
+                    return [categoryName, matchingServices];
+                })
+                .filter(([, services]) => services.length > 0);
+        };
 
-        const servicesHTML = categoriesWithServices.map(([categoryName, services]) => {
+        const renderServicesMarkup = ([categoryName, services]) => {
             const displayCategoryName = categoryName.replace(/^\d+\.\s*/, '');
 
             const cardsHTML = services.map((service) => {
@@ -519,13 +524,24 @@ class SkinCareApp {
                     </div>
                 </div>
             `;
-        }).join('');
+        };
 
-        const servicesContent = servicesHTML || `
-            <div class="category-section">
-                <p class="text-center fade-in">No services match your current filters.</p>
-            </div>
-        `;
+        const updateServicesContent = (query) => {
+            const categoriesWithServices = filterCategories(query);
+            const servicesWrapper = document.getElementById('services-wrapper');
+            if (!servicesWrapper) {
+                return;
+            }
+
+            const servicesHTML = categoriesWithServices.map(renderServicesMarkup).join('');
+            servicesWrapper.innerHTML = servicesHTML || `
+                <div class="category-section">
+                    <p class="text-center fade-in">No services match your current filters.</p>
+                </div>
+            `;
+
+            this.initAnimations();
+        };
 
         mainContent.innerHTML = `
             <section class="services">
@@ -545,7 +561,7 @@ class SkinCareApp {
                             <input type="search" id="service-search" class="filter-input" placeholder="Search by name or description" aria-label="Search services">
                         </div>
                     </div>
-                    ${servicesContent}
+                    <div id="services-wrapper"></div>
                 </div>
             </section>
         `;
@@ -562,11 +578,52 @@ class SkinCareApp {
         const serviceSearchInput = document.getElementById('service-search');
         if (serviceSearchInput) {
             serviceSearchInput.value = this.serviceSearchQuery;
+            if (this.serviceSearchFocused) {
+                const caretPosition = typeof this.serviceSearchCaret === 'number'
+                    ? Math.min(this.serviceSearchCaret, this.serviceSearchQuery.length)
+                    : this.serviceSearchQuery.length;
+                serviceSearchInput.focus();
+                try {
+                    serviceSearchInput.setSelectionRange(caretPosition, caretPosition);
+                } catch (error) {
+                    // Some browsers may not allow setting selection on certain input types
+                }
+            }
             serviceSearchInput.addEventListener('input', (event) => {
-                this.serviceSearchQuery = event.target.value;
-                this.renderServices();
+                const target = event.target;
+                this.serviceSearchQuery = target.value;
+                this.serviceSearchFocused = true;
+                this.serviceSearchCaret = typeof target.selectionStart === 'number'
+                    ? target.selectionStart
+                    : target.value.length;
+                if (this.serviceSearchDebounce) {
+                    clearTimeout(this.serviceSearchDebounce);
+                }
+                this.serviceSearchDebounce = window.setTimeout(() => {
+                    this.serviceSearchDebounce = null;
+                    updateServicesContent();
+                }, 300);
+            });
+            serviceSearchInput.addEventListener('focus', (event) => {
+                const target = event.target;
+                this.serviceSearchFocused = true;
+                this.serviceSearchCaret = typeof target.selectionStart === 'number'
+                    ? target.selectionStart
+                    : target.value.length;
+            });
+            serviceSearchInput.addEventListener('blur', () => {
+                this.serviceSearchFocused = false;
+                this.serviceSearchCaret = null;
+                if (this.serviceSearchDebounce) {
+                    clearTimeout(this.serviceSearchDebounce);
+                    this.serviceSearchDebounce = null;
+                    updateServicesContent();
+                }
             });
         }
+
+        // Initial render to ensure results reflect existing query
+        updateServicesContent();
 
         this.initAnimations();
     }

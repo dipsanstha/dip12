@@ -306,6 +306,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
 }
 
 
@@ -318,7 +319,8 @@ p {
     font-family: Garamond, serif;
     font-weight: bold;
     display: flex;
-    justify-content: left;
+    align-items: center;
+    justify-content: flex-start;
     gap: 1rem;
 }
 

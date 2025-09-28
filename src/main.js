@@ -726,8 +726,8 @@ class SkinCareApp {
                             Log out
                         </button>
                         ` : `
-                        <button type="button" id="gallery-admin-login" class="btn btn-secondary gallery-admin-toggle">
-                            Admin Login
+                        <button type="button" id="gallery-admin-login" class="gallery-admin-logo-button gallery-admin-toggle" aria-label="Admin Login">
+                            <img src="public/images/logo.png" alt="Admin Login" class="gallery-admin-logo">
                         </button>
                         `}
                     </div>

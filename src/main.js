@@ -900,7 +900,7 @@ class SkinCareApp {
                                     <i class="fas fa-phone"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Phone:</span>
-                                        <span class="contact-value"><a href="tel:">(555) 123-4567</a></span>
+                                        <span class="contact-value"><a href="tel:+1-14159679554">+1-14159679554</a></span>
                                     </div>
                                 </div>
                                 
@@ -908,7 +908,7 @@ class SkinCareApp {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value"><a href="mailto:">info@SkinCarebyLaxmi.com</a></span>
+                                        <span class="contact-value"><a href="mailto:laxmi_sanu@yahoo.com">laxmi_sanu@yahoo.com</a></span>
                                     </div>
                                 </div>
                                 

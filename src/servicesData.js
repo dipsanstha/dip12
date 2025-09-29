@@ -10,7 +10,7 @@ export const servicesByCategory = {
         { name: 'Microdermabrasion', image: '/OIP4.jpg', description: 'Exfoliates the skin\'s outermost layer to remove dead cells, revealling smoother, softer and brighter skin. ', price: '$120', duration: '60 min', icon: 'fa-fire' }
     ],
     '2. Add-On Treatments': [
-        { name: 'LED Therapy', image: 'public/imagesservices(LED-Light-Therapy-Treatment-1080x675.png', description: 'Boost your skin\'s healing process with our LED therapy, designed to treat acne, aging, and pigmentation.', price: '$55', duration: '30 min', icon: 'fa-lightbulb' },
+        { name: 'LED Therapy', image: '/LED-Light-Therapy-Treatment-1080x675.png', description: 'Boost your skin\'s healing process with our LED therapy, designed to treat acne, aging, and pigmentation.', price: '$55', duration: '30 min', icon: 'fa-lightbulb' },
         { name: 'Goat Milk Peel', image: '/goat.jpg', description: 'A soothing and nourishing peel, perfect for sensitive skin.', price: '$25', duration: '10 min', icon: 'fa-fire' },
         { name: 'Microdermabrasion', image: '/OIP4.jpg', description: 'Exfoliate and refresh your skin with this rejuvenating microdermabrasion treatment.', price: '$50', duration: '10 min', icon: 'fa-fire' }
     ],

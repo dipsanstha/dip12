@@ -2,9 +2,9 @@
 export const servicesByCategory = {
     '1. Signature Facials': [
         { name: 'Custom Facial', image: '/swedish-massage.jpg', description: 'Personalized facial to address your unique skin needs and provide a radiant glow.', price: '$85', duration: '55 min', icon: 'fa-spa' },
-        { name: 'Laxmi\'s Special', image: '/OIP.jpg', description: ' Achieve radiant skin with our microdermabrasion-goat milk peel combo, completed with a soothing upper body massage. Special pricing available.', price: '$150', duration: '60 min', icon: 'fa-spa' },
+        { name: 'Laxmi\'s Special', image: '/OIP.jpg', description: ' Achieve radiant skin with our microdermabrasion-goat milk peel combo, completed with a soothing upper body massage. Special pricing available.', price: '$150', duration: '90 min', icon: 'fa-spa' },
         { name: 'O2 Derm Oxygen Facial', image: '/oxygenfacial.jpg', description: 'Rejuvenate your skin with the oxygen facial, perfect for hydration and revitalization.', price: '$150', duration: '65 min', icon: 'fa-spa' },
-        { name: 'GlowTox Facelift Facial', image: '/glow.jpg', description: 'Lift and brighten your face with this signature treatment that promotes youthful radiance and tightens the skin.', price: '$200', duration: '70 min', icon: 'fa-spa' },
+        { name: 'GlowTox Facelift Facial', image: '/glow.jpg', description: 'non-invasive anti-aging treatment that plumps the skin, reduces fine lines and wrinkles, and restores volume using Poly L-Lactic Acid (PLLA). Applied topically with a patented delivery system, it boosts collagen production and delivers cumulative, long-lasting results, enhanced with the HOP+ home care system and no fash wash for 12hours.', price: '$200', duration: '70 min', icon: 'fa-spa' },
         { name: 'Microchanneling Special', image: '/michrochanneling.jpg', description: 'A minimally invasive cosmetic procedure that uses a device with tiny needles to create thousands of uniform, microscopic channels in the skin to improve skin tone,texture and firmness.', price: '$225', duration: '60 min', icon: 'fa-spa' },
         { name: 'Acne Facial', image: 'acne.jpg', description: 'Treat acne-prone skin with our specialized acne facial that helps to cleanse, balance, and reduce inflammation.', price: '$95', duration: '55 min', icon: 'fa-spa' },
         { name: 'Microdermabrasion', image: '/OIP4.jpg', description: 'Exfoliates the skin\'s outermost layer to remove dead cells, revealling smoother, softer and brighter skin. ', price: '$120', duration: '60 min', icon: 'fa-fire' }
@@ -24,7 +24,7 @@ export const servicesByCategory = {
     '4. Body Treatments': [
         { name: 'Purifying Back Treatment', image: '/pbt.jpg', description: 'Cleanse and detoxify your back with this deep-cleansing back treatment.', price: '$85', duration: '50 min', icon: 'fa-spa' },
         { name: 'Detox Body Scrub', image: '/body-scrub.jpg', description: 'Exfoliate and detoxify your skin with our invigorating body scrub.', price: '$80', duration: '60 min', icon: 'fa-spa' },
-        { name: 'Hyaluronic Acid Infusion', image: '/hyaluronic.jpg', description: 'Hydrate and plump your skin with our hyaluronic acid infusion treatment.', price: '$120', duration: '60 min', icon: 'fa-spa' }
+        { name: 'Hyaluronic Acid Infusion', image: '/hyalo.jpg', description: 'Hydrate and plump your skin with our hyaluronic acid infusion treatment.', price: '$120', duration: '60 min', icon: 'fa-spa' }
     ],
     '5. Waxing Services - Face': [
         { name: 'Eyebrow Wax', image: '/eyebrow.jpg', description: 'Shape and define your brows with our precise waxing service.', price: '$25', duration: '15 min', icon: 'fa-bullseye' },

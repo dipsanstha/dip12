@@ -1002,7 +1002,11 @@ class SkinCareApp {
                                     <i class="fas fa-envelope"></i>
                                     <div class="contact-text">
                                         <span class="contact-label">Email:</span>
-                                        <span class="contact-value"><a href="mailto:skincarebylaxmi@gmail.com">skincarebylaxmi@gmail.com</a></span>
+                                        <span class="contact-value">
+                                            <a href="mailto:skincarebylaxmi@gmail.com">skincarebylaxmi@gmail.com</a>
+                                            <br>
+                                            <a href="mailto:laxmi_sanu2@yahoo.com">laxmi_sanu2@yahoo.com</a>
+                                        </span>
                                     </div>
                                 </div>
                                 

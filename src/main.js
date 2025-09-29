@@ -1019,6 +1019,14 @@ class SkinCareApp {
                                                 <span class="days">Monday:</span>
                                                 <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
+                                            <div class="hours-row">
+                                                <span class="days">Tuesday:</span>
+                                                <span class="times">closed</span>
+                                            </div>
+                                            <div class="hours-row">
+                                                <span class="days">Wednesday:</span>
+                                                <span class="times">Closed/span>
+                                            </div>
                                            
                                             <div class="hours-row">
                                                 <span class="days">Thursday:</span>
@@ -1030,11 +1038,11 @@ class SkinCareApp {
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Saturday:</span>
-                                                <span class="times">11:00 PM - 6:00 PM</span>
+                                                <span class="times">12:00 PM - 6:00 PM</span>
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Sunday:</span>
-                                                <span class="times">Closed</span>
+                                                <span class="times">10:00 AM - 6:00 PM</span>
                                             </div>
                                         </div>
                                     </div>

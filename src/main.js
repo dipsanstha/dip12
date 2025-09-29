@@ -1025,7 +1025,7 @@ class SkinCareApp {
                                             </div>
                                             <div class="hours-row">
                                                 <span class="days">Wednesday:</span>
-                                                <span class="times">Closed/span>
+                                                <span class="times">Closed</span>
                                             </div>
                                            
                                             <div class="hours-row">

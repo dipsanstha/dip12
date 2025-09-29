@@ -32,9 +32,9 @@ class SkinCareApp {
 
         this.reviewStorageKey = 'skincare-app-reviews';
         this.testimonials = [
-            { name: 'Priya S.', rating: 5, quote: 'My skin has never felt better! The personalized care and attention to detail made the experience unforgettable.', date: '2024-11-15' },
-            { name: 'Emily R.', rating: 5, quote: 'The ambience is so calming and every treatment feels luxurious. Highly recommend the signature facial!', date: '2025-01-03' },
-            { name: 'Monica D.', rating: 4, quote: 'Wonderful service and results. The team is knowledgeable and genuinely cares about your skin health.', date: '2025-02-20' }
+            { name: 'Priya S.', rating: 5, quote: 'My skin has never felt better! The personalized care and attention to detail made the experience unforgettable.', date: '2025-09-12' },
+            { name: 'Emily R.', rating: 5, quote: 'The ambience is so calming and every treatment feels luxurious. Highly recommend the signature facial!', date: '2025-09-18' },
+            { name: 'Monica D.', rating: 4, quote: 'Wonderful service and results. The team is knowledgeable and genuinely cares about your skin health.', date: '2025-09-21' }
         ];
         this.reviews = this.loadStoredReviews();
         this.pendingReviewFeedback = null;
@@ -50,6 +50,8 @@ class SkinCareApp {
     }
 
     init() {
+        this.enforceHttps();
+        this.ensureSecurityCookie();
         // Initialize navigation
         this.initNavigation();
         
@@ -64,6 +66,97 @@ class SkinCareApp {
 
         // Prepare gallery images after initialisation
         this.refreshGalleryImages();
+    }
+
+    enforceHttps() {
+        if (window.location.protocol === 'https:') {
+            return;
+        }
+
+        const hostname = window.location.hostname;
+        const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(hostname) || /^127\.\d+\.\d+\.\d+$/.test(hostname);
+        if (isLocalHost) {
+            console.warn('HTTPS enforcement skipped for local development environment.');
+            return;
+        }
+
+        const targetUrl = `https://${window.location.host}${window.location.pathname}${window.location.search}${window.location.hash}`;
+        window.location.replace(targetUrl);
+    }
+
+    ensureSecurityCookie() {
+        const cookieName = 'skincare_app_trusted_session';
+        if (this.hasSecureCookie(cookieName)) {
+            return;
+        }
+
+        const sessionToken = this.generateSecureToken(16);
+        this.setSecureCookie(cookieName, sessionToken, {
+            days: 365,
+            sameSite: 'Strict'
+        });
+    }
+
+    setSecureCookie(name, value, options = {}) {
+        if (!name) {
+            return;
+        }
+
+        const { days = 365, sameSite = 'Strict' } = options;
+        const encodedName = encodeURIComponent(name);
+        const encodedValue = encodeURIComponent(value);
+        const segments = [`${encodedName}=${encodedValue}`];
+
+        const maxAgeSeconds = Number.isFinite(days) ? Math.max(0, Math.floor(days * 86400)) : 0;
+        if (maxAgeSeconds > 0) {
+            segments.push(`Max-Age=${maxAgeSeconds}`);
+            const expiresAt = new Date(Date.now() + maxAgeSeconds * 1000);
+            segments.push(`Expires=${expiresAt.toUTCString()}`);
+        }
+
+        segments.push('Path=/');
+
+        const allowedSameSite = ['Strict', 'Lax', 'None'];
+        const normalizedSameSite = allowedSameSite.includes(sameSite) ? sameSite : 'Lax';
+        segments.push(`SameSite=${normalizedSameSite}`);
+
+        if (normalizedSameSite === 'None' && window.location.protocol !== 'https:') {
+            console.warn('SameSite=None cookies require HTTPS for the Secure attribute. Current page is not served over HTTPS.');
+        }
+
+        if (window.location.protocol === 'https:') {
+            segments.push('Secure');
+        } else {
+            console.warn('Secure cookies can only be set over HTTPS. Cookie will be set without the Secure attribute.');
+        }
+
+        document.cookie = segments.join('; ');
+    }
+
+    hasSecureCookie(name) {
+        if (!name || !document.cookie) {
+            return false;
+        }
+
+        const encodedName = `${encodeURIComponent(name)}=`;
+        return document.cookie.split(';').some((cookiePart) => cookiePart.trim().startsWith(encodedName));
+    }
+
+    generateSecureToken(byteLength = 16) {
+        const length = Math.max(1, Math.floor(byteLength));
+        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+            const randomBytes = new Uint8Array(length);
+            window.crypto.getRandomValues(randomBytes);
+            return Array.from(randomBytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        let fallbackToken = '';
+        const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let index = 0; index < length * 2; index += 1) {
+            const randomIndex = Math.floor(Math.random() * possibleChars.length);
+            fallbackToken += possibleChars.charAt(randomIndex);
+        }
+        return fallbackToken;
     }
 
     initNavigation() {

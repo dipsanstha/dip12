@@ -148,6 +148,16 @@ The color scheme can be modified in `assets/css/main.css` by updating the CSS cu
    - Upload the contents of the `dist` folder to your web server
    - The built files are optimized and minified for production
 
+### HTTPS & Secure Cookies
+
+- **Force HTTPS**: The app automatically redirects to HTTPS outside local development (see `src/main.js` `enforceHttps()`), ensuring the `Secure` cookie flag can be applied.
+- **Local testing**: Redirects are skipped for `localhost` and `127.0.0.0/8`. Expect console warnings when running over HTTP.
+- **Verification steps**:
+  1. Serve the site via HTTPS.
+  2. Open DevTools → Application → Cookies → your domain.
+  3. Confirm `skincare_app_trusted_session` shows `SameSite=Strict`, `Max-Age` (or `Expires`), and `Secure`.
+  4. You can also run `document.cookie` in the console to verify the cookie value is present.
+
 ## License
 
 This project is open source and available under the MIT License.
